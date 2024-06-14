@@ -1,3 +1,0 @@
-TOPIC - ARRAYS
-- Arrays.fill(name_arr, 'g') : Used in a char array to fill the array with some initial value.
-- String.valueOf(arr) : Converts a character array to a String value.
