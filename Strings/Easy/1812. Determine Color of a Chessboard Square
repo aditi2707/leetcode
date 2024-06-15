@@ -1,0 +1,18 @@
+class Solution {
+    public boolean squareIsWhite(String coordinates) {
+        
+        char letter = coordinates.charAt(0);
+        char number = coordinates.charAt(1);
+
+        if(letter == 'a' || letter == 'c' || letter == 'e' || letter == 'g'){
+            if(number % 2 == 0){
+                return true;
+            }
+            return false;
+        }
+        if(number % 2 == 0){
+            return false;
+        }
+        return true;
+    }
+}
