@@ -1,0 +1,48 @@
+class Solution {
+    public boolean isSumEqual(String firstWord, String secondWord, String targetWord) {
+        
+        String letterValue = "abcdefghij";
+        int i = 0, j = 0;
+        String firstWordNum = "";
+        String secondWordNum = "";
+        String targetWordNum = "";
+
+        String sum = "";
+
+        while(i < firstWord.length() && j < secondWord.length()){
+            char ch = firstWord.charAt(i);
+            firstWordNum += letterValue.indexOf(ch);
+            i++;
+
+            char ch1 = secondWord.charAt(j);
+            secondWordNum += letterValue.indexOf(ch1);
+            j++;
+        }
+
+        while(i < firstWord.length()){
+            char ch = firstWord.charAt(i);
+            firstWordNum += letterValue.indexOf(ch);
+            i++;
+        }
+
+        while(j < secondWord.length()){
+            char ch = secondWord.charAt(j);
+            secondWordNum += letterValue.indexOf(ch);
+            j++;
+        }
+
+        for(int k = 0; k < targetWord.length(); k++){
+            char ch = targetWord.charAt(k);
+            targetWordNum += letterValue.indexOf(ch);
+        }
+
+        int firstNum = Integer.parseInt(firstWordNum);
+        int secondNum = Integer.parseInt(secondWordNum);
+
+        if((firstNum + secondNum) == Integer.parseInt(targetWordNum)){
+            return true;
+        }
+
+        return false;
+    }
+}
