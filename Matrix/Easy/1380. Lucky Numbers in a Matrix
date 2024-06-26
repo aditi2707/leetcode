@@ -1,0 +1,81 @@
+class Solution {
+    public List<Integer> luckyNumbers (int[][] matrix) {
+        
+        List<Integer> ans = new ArrayList<>();
+
+        for(int i = 0; i < matrix.length; i++){
+            int min = Integer.MAX_VALUE;
+            int minIndex = 0;
+            int max = 0;
+            for(int j = 0; j < matrix[i].length; j++){
+                if(matrix[i][j] < min){
+                    min = matrix[i][j];
+                    minIndex = j;
+                }
+            }
+
+            max = min;
+
+            for(int k = 0; k < matrix.length; k++){
+                max = Math.max(max, matrix[k][minIndex]);
+            }
+
+            if(max == min){
+                ans.add(max);
+                return ans;
+            }
+        }
+
+
+
+        // for(int i = 0; i < matrix[0].length; i++){
+        //     int max = 0;
+        //     for(int j = 0; j < matrix.length; j++){
+        //         max = Math.max(max, matrix[j][i]);
+        //     }
+        //     ans.add(max);
+        // }
+
+        // for(int i = 0; i < matrix.length; i++){
+        //     Arrays.sort(matrix[i]);
+        //     if(ans.contains(matrix[i][0])){
+        //         ans = new ArrayList<>();
+        //         ans.add(matrix[i][0]);
+        //         return ans;
+        //     }
+        // }
+
+
+
+
+        
+
+        // for(int i = 0; i < matrix.length; i++){
+        //     int min = Integer.MAX_VALUE;
+        //     for(int j = 0; j < matrix[i].length; j++){
+        //         if(matrix[i][j] < min){
+        //             min = matrix[i][j];
+        //         }
+        //     }
+        //     ans.add(min);
+        // }
+
+        
+
+        // for(int i = 0; i < matrix[0].length; i++){
+        //     int max = 0;
+        //     for(int j = 0; j < matrix.length; j++){
+        //         if(matrix[j][i] > max){
+        //             max = matrix[j][i];
+        //         }
+        //     }
+        //     if(ans.contains(max)){
+        //         ans = new ArrayList<>();
+        //         ans.add(max);
+        //         return ans;
+        //     }
+        // }
+
+        return new ArrayList<>();
+    }
+}
