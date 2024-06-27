@@ -1,0 +1,39 @@
+class Solution {
+    public int pivotInteger(int n) {
+
+        int sum = n*(n+1)/2;
+        int low = 1, high = n;
+
+        while(low < high){
+            int mid = (low + high)/2;
+
+            if(mid*mid == sum){
+                return mid;
+            }
+            else if(mid*mid < sum){
+                low = mid+1;
+            }
+            else{
+                high = mid;
+            }
+        }
+
+        if(n < 9){
+            if(n*n == sum){
+                return n;
+            }
+        }
+        return -1;
+        
+        // for(int i = 1; i <= n; i++){
+        //     int pivotSum = (i*(i+1))/2;
+        //     int remSum = (n*(n+1))/2 - pivotSum + i;
+
+        //     if(pivotSum == remSum){
+        //         return i;
+        //     }
+        // }
+
+        // return -1;
+    }
+}
