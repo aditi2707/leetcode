@@ -1,0 +1,55 @@
+class Solution {
+
+    // public boolean diagonal(int p, int q, int[][] matrix, int num){
+    //     while(p < matrix.length && q < matrix[0].length){
+    //         if(matrix[p][q] != num){
+    //         return false;
+    //     }
+    //     else{
+    //         p++;
+    //         q++;
+    //     }
+    //     }
+        
+    //     return true;
+    // }
+
+    public boolean isToeplitzMatrix(int[][] matrix) {
+
+        for(int i = 1; i < matrix.length; i++){
+            for(int j = 1; j < matrix[i].length; j++){
+                if(matrix[i][j] != matrix[i-1][j-1]){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+        
+        // int i = 0, j = 0;
+
+        // while(j < matrix[0].length){
+        //     boolean ans = diagonal(0, j, matrix, matrix[0][j]);
+        //     if(!ans){
+        //         return false;
+        //     }
+        //     else{
+        //         j++;
+        //     }
+        // }
+
+        // i = 1; j = 0;
+        // while(i < matrix.length){
+        //     boolean ans = diagonal(i, 0, matrix, matrix[i][0]);
+        //     if(!ans){
+        //         return false;
+        //     }
+        //     else{
+        //         j = 0;
+        //         i++;
+        //     }
+        // }
+
+        // return true;
+    }
+}
