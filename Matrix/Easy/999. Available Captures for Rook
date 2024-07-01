@@ -1,0 +1,139 @@
+class Solution {
+
+    public int upCheck(int p, int q, char[][] board){
+
+        for(int i = p+1; i < 8; i++){
+            if(board[i][q] == 'B'){
+                return 0;
+            }
+            if(board[i][q] == 'p'){
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public int downCheck(int p, int q, char[][] board){
+
+        for(int i = p-1; i >= 0; i--){
+            if(board[i][q] == 'B'){
+                return 0;
+            }
+            if(board[i][q] == 'p'){
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public int leftCheck(int p, int q, char[][] board){
+
+        for(int i = q-1; i >= 0; i--){
+            if(board[p][i] == 'B'){
+                return 0;
+            }
+            if(board[p][i] == 'p'){
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public int rightCheck(int p, int q, char[][] board){
+
+        for(int i = q+1; i < 8; i++){
+            if(board[p][i] == 'B'){
+                return 0;
+            }
+            if(board[p][i] == 'p'){
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public int numRookCaptures(char[][] board) {
+
+        int rookXPos = 0;
+        int rookYPos = 0;
+        int counter = 0;
+
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++){
+                if(board[i][j] == 'R'){
+                    counter += upCheck(i, j, board);
+                    counter += downCheck(i, j, board);
+                    counter += leftCheck(i, j, board);
+                    counter += rightCheck(i, j, board);
+                }
+            }
+        }
+
+        return counter;
+
+
+
+
+        
+
+        
+
+    
+        
+        // int rookXPos = 0;
+        // int rookYPos = 0;
+        // int counter = 0;
+
+        // for(int i = 0; i < board.length; i++){
+        //     for(int j = 0; j < board[i].length; j++){
+        //         if(board[i][j] == 'R'){
+        //             rookXPos = i;
+        //             rookYPos = j;
+        //             break;
+        //         }
+        //     }
+        // }
+
+        // for(int i = rookYPos-1; i >= 0; i--){
+        //     if(board[rookXPos][i] == 'B'){
+        //         break;
+        //     }
+        //     if(board[rookXPos][i] == 'p'){
+        //         counter++;
+        //         break;
+        //     }
+        // }
+
+        // for(int i = rookYPos+1; i < 8; i++){
+        //     if(board[rookXPos][i] == 'B'){
+        //         break;
+        //     }
+        //     if(board[rookXPos][i] == 'p'){
+        //         counter++;
+        //         break;
+        //     }
+        // }
+
+        // for(int i = rookXPos+1; i < 8; i++){
+        //     if(board[i][rookYPos] == 'B'){
+        //         break;
+        //     }
+        //     if(board[i][rookYPos] == 'p'){
+        //         counter++;
+        //         break;
+        //     }
+        // }
+
+        // for(int i = rookXPos-1; i >= 0; i--){
+        //     if(board[i][rookYPos] == 'B'){
+        //         break;
+        //     }
+        //     if(board[i][rookYPos] == 'p'){
+        //         counter++;
+        //         break;
+        //     }
+        // }
+
+        // return counter;
+    }
+}
