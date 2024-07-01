@@ -1,0 +1,21 @@
+class Solution {
+    public boolean checkXMatrix(int[][] grid) {
+        
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j <= grid.length/2; j++){
+                if(i == j || i == grid.length-1-j){
+                    if((grid[i][j] == 0) || (grid[i][grid.length-1-j] == 0)){
+                        return false;
+                    }
+                }
+                else{
+                    if((grid[i][j] != 0) || (grid[i][grid.length-1-j] != 0)){
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+}
