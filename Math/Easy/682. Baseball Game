@@ -1,0 +1,81 @@
+class Solution {
+    public int calPoints(String[] operations) {
+
+        Stack<Integer> stack = new Stack<>();
+        int top = -1;
+        int sum = 0;
+
+        for(int i = 0; i < operations.length; i++){
+            String op = operations[i];
+
+            if(op.equals("+")){
+                int num1 = stack.pop();
+                int num2 = stack.pop();
+
+                stack.push(num2);
+                stack.push(num1);
+                stack.push(num1 + num2);
+                top++;
+                sum += stack.peek();
+            }
+            else if(op.equals("C")){
+                sum -= stack.peek();
+                stack.pop();
+                top--;
+            }
+            else if(op.equals("D")){
+                int num1 = stack.peek();
+                stack.push(num1 * 2);
+                top++;
+                sum += stack.peek();
+            }
+            else{
+                stack.push(Integer.parseInt(op));
+                top++;
+                sum += Integer.parseInt(op);
+            }
+        }
+
+        return sum;
+
+
+
+
+
+        
+        // ArrayList<Integer> ans = new ArrayList<>();
+        // int sum = 0;
+        // int k = -1;
+
+        // for(int i = 0; i < operations.length; i++){
+        //     String op = operations[i];
+
+        //     if(op.compareTo("+") == 0){
+        //         int num1 = ans.get(k);
+        //         int num2 = ans.get(k-1);
+
+        //         ans.add(num1 + num2);
+        //         k++;
+        //         sum += ans.get(k);
+        //     }
+        //     else if(op.compareTo("C") == 0){
+        //         sum -= ans.get(k);
+        //         ans.remove(k);
+        //         k--;
+        //     }
+        //     else if(op.compareTo("D") == 0){
+        //         int num1 = ans.get(k);
+        //         ans.add(num1 * 2);
+        //         k++;
+        //         sum += ans.get(k);
+        //     }
+        //     else{
+        //         ans.add(Integer.parseInt(op));
+        //         k++;
+        //         sum += Integer.parseInt(op);
+        //     }
+        // }
+
+        // return sum;
+    }
+}
