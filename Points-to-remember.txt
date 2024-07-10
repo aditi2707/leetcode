@@ -1,3 +1,5 @@
 - Arrays.fill(name_arr, 'g') : Used in a char array to fill the array with some initial value.
 - String.valueOf(arr) : Converts a character array to a String value.
 - str.indexOf() : This function not only helps in finding the index of a character but also the index of any substring. For e.g if we have to find index of "te" in "attention", then the index = 2. This is useful in prefix/substring/postfix comparison questions.
+- stack.toString() : Can also convert stack elements to a string.
+- In stack questions where we have to pop any element, first check whether the stack is non-empty. If it is empty then generally push the element otherwise check condition and do accordingly.
