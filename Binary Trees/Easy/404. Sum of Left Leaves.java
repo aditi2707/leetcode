@@ -39,7 +39,28 @@ class Solution {
             return 0;
         }
 
-        return findLeft(root, false);
+        if(root.left != null && root.left.left == null && root.left.right == null){
+            return root.left.val + sumOfLeftLeaves(root.right);
+        }
+
+        return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+        
+        
+        
+        
+        
+        // if(root == null){
+        //     return 0;
+        // }
+
+        // return findLeft(root, false);
+
+
+
+
+
+
+
         
         // Queue<TreeNode> queue = new LinkedList<>();
         // queue.add(root);
