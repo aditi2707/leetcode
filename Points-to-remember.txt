@@ -6,3 +6,5 @@
 - Integer.parseInt(str, 2) : If want to convert binary to decimal, first convert the number into a string. Then, use this where 2 represents the base in which the string is present. Can also be used with hexadecimal numbers (with base 16).
 - For hashset, we cannot loop through the elements using indices. We can only loop using for(Wrapper_Class x: hashset).
 - str.toCharArray() - When using char in a string, first convert it into a char array. Works faster.
+- str.toLowerCase() - Converts whole string to lowercase but the process takes time.
+- Character.isLetterOrDigit(ch) - Checks whether a character is alphanumeric or not.
