@@ -1,43 +1,47 @@
 class Solution {
 
-    public int decToBin(int[] ans, int n){
-        
+    public int countOnes(int n, int[] ans){
         if(n == 1){
             return 1;
         }
 
-        if(ans[n] != -1){
+        if(ans[n] != 0){
             return ans[n];
         }
 
         if(n % 2 != 0){
-            ans[n] = decToBin(ans, n/2) + 1;
+            ans[n] = 1 + countOnes(n/2, ans);
             return ans[n];
         }
-        
-        return decToBin(ans, n/2);
+        ans[n] = countOnes(n/2, ans);
+        return ans[n];
     }
+
+    
     public int[] countBits(int n) {
         
         int[] ans = new int[n+1];
-
         if(n == 0){
             return ans;
         }
 
-        for(int i = 2; i < n+1; i++){
-            ans[i] = -1;
-        }
-        ans[0] = 0;
-        ans[1] = 1;
-        
-        for(int i = 2; i < ans.length; i++){
-            if(i % 2 != 0){
-                ans[i] = ans[i/2] + 1;
-            }
-            else{
-                ans[i] = ans[i/2];
-            }
+        for(int i = 1; i <= n; i++){
+            // if(i == 1 || i == 2){
+            //     ans[i] = 1;
+            // }
+            // if(ans[i] != 0){
+            //     continue;
+            // }
+            // else{
+            //     if(i % 2 != 0){
+            //         ans[i] += 1 + ans[i/2];
+            //     }
+            //     else{
+            //         ans[i] += ans[i/2];
+            //     }
+            // }
+            
+            ans[i] = countOnes(i, ans);
         }
 
         return ans;
