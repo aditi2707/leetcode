@@ -14,21 +14,56 @@
  * }
  */
 class Solution {
+
+    public boolean isSameValue(TreeNode root, int compare){
+
+        if(root == null){
+            return true;
+        }
+
+        if(root.val != compare){
+            return false;
+        }
+
+        return isSameValue(root.left, compare) && isSameValue(root.right, compare);
+    }
+
+    
     public boolean isUnivalTree(TreeNode root) {
 
         if(root == null){
             return true;
         }
 
-        if(root.left != null && root.val != root.left.val){
-            return false;
-        }
+        int compare = root.val;
 
-        if(root.right != null && root.val != root.right.val){
-            return false;
-        }
+        return isSameValue(root, compare);
 
-        return isUnivalTree(root.left) && isUnivalTree(root.right);
+
+
+
+
+        
+
+        // if(root == null){
+        //     return true;
+        // }
+
+        // if(root.left != null && root.val != root.left.val){
+        //     return false;
+        // }
+
+        // if(root.right != null && root.val != root.right.val){
+        //     return false;
+        // }
+
+        // return isUnivalTree(root.left) && isUnivalTree(root.right);
+
+
+
+
+
+        
 
 
         
