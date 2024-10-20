@@ -15,6 +15,22 @@
  */
 class Solution {
 
+    public void postorder(TreeNode root, int[] sum){
+
+        if(root == null){
+            return;
+        }
+
+        postorder(root.left, sum);
+
+        if(root.left != null && root.left.left == null && root.left.right == null){
+            sum[0] += root.left.val;
+            
+        }
+        postorder(root.right, sum);
+    }
+    
+
     public int findLeft(TreeNode root, boolean isLeft){
         if(root == null){
             return 0;
@@ -44,6 +60,13 @@ class Solution {
         }
 
         return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+
+        
+
+        // int[] sum = {0};
+        // postorder(root, sum);
+
+        // return sum[0];
         
         
         
