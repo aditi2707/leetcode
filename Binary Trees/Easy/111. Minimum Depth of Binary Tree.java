@@ -17,33 +17,54 @@ class Solution {
 
     public int minDepth(TreeNode root) {
 
-        Queue<TreeNode> queue = new LinkedList<>();
-        int level = 1;
         if(root == null){
             return 0;
         }
 
-        queue.add(root);
-
-        while(!queue.isEmpty()){
-            int qSize = queue.size();
-            for(int i = 0; i < qSize; i++){
-                TreeNode curr = queue.poll();
-                if(curr.left == null && curr.right == null){
-                    return level;
-                }
-
-                if(curr.left != null){
-                    queue.add(curr.left);
-                }
-                if(curr.right != null){
-                    queue.add(curr.right);
-                }
-            }
-            level++;
+        if(root.left == null || root.right == null){
+            return 1 + Math.max(minDepth(root.left), minDepth(root.right));
         }
 
-        return level;
+        return 1 + Math.min(minDepth(root.left), minDepth(root.right));
+
+
+
+
+        
+
+        // Queue<TreeNode> queue = new LinkedList<>();
+        // int level = 1;
+        // if(root == null){
+        //     return 0;
+        // }
+
+        // queue.add(root);
+
+        // while(!queue.isEmpty()){
+        //     int qSize = queue.size();
+        //     for(int i = 0; i < qSize; i++){
+        //         TreeNode curr = queue.poll();
+        //         if(curr.left == null && curr.right == null){
+        //             return level;
+        //         }
+
+        //         if(curr.left != null){
+        //             queue.add(curr.left);
+        //         }
+        //         if(curr.right != null){
+        //             queue.add(curr.right);
+        //         }
+        //     }
+        //     level++;
+        // }
+
+        // return level;
+
+
+
+
+
+        
         
         // if(root == null){
         //     return 0;
