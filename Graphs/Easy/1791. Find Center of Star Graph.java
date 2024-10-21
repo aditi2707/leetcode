@@ -6,6 +6,36 @@ class Solution {
         } else {
             return edges[0][1];
         }
+
+
+        
+
+        // List<List<Integer>> adjList = new ArrayList<>();
+        // int vertex = 0;
+
+        // for(int i = 0; i < edges.length + 1; i++){
+        //     adjList.add(new ArrayList<>());
+        // }
+
+        // for(int i = 0; i < edges.length; i++){
+        //     adjList.get(edges[i][0] - 1).add(edges[i][1] - 1);
+        //     adjList.get(edges[i][1] - 1).add(edges[i][0] - 1);
+
+        //     if(adjList.get(edges[i][0] - 1).size() == edges.length){
+        //         return edges[i][0];
+        //     }
+        //     if(adjList.get(edges[i][1] - 1).size() == edges.length){
+        //         return edges[i][1];
+        //     }
+        // }
+
+        // return -1;
+
+
+
+
+
+        
         
         // HashMap<Integer, List<Integer>> vertices = new HashMap<>();
 
