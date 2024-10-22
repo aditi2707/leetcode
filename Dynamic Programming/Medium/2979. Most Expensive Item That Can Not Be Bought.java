@@ -29,19 +29,53 @@ class Solution {
 
 
     public int mostExpensiveItem(int primeOne, int primeTwo) {
-        
-        int[] dp = new int[primeOne*primeTwo];
-        int max = 0;
 
-        if(primeOne < primeTwo)
-            max = findExpItem(primeOne, primeTwo, dp, primeOne+1, 0);
-        else
-            max = findExpItem(primeTwo, primeOne, dp, primeTwo+1, 0);
-        
-        if(max == 0){
-            return primeOne-1;
+        int[] dp = new int[primeOne * primeTwo];
+
+        for(int i = 1; i < primeOne * primeTwo; i++){
+            if(i < Math.min(primeOne, primeTwo)){
+                dp[i] = 1;
+            }
+            if(i % primeOne == 0 || i % primeTwo == 0){
+                continue;
+            }
+            if(dp[Math.abs(i - primeOne)] == 1 || dp[Math.abs(i - primeTwo)] == 1){
+                dp[i] = 1;
+            }
         }
-        return max;
+
+        for(int i = dp.length - 1; i > 0; i--){
+            if(dp[i] == 1){
+                return i;
+            }
+        }
+
+        return -1;
+
+
+
+
+
+        
+        
+        // int[] dp = new int[primeOne*primeTwo];
+        // int max = 0;
+
+        // if(primeOne < primeTwo)
+        //     max = findExpItem(primeOne, primeTwo, dp, primeOne+1, 0);
+        // else
+        //     max = findExpItem(primeTwo, primeOne, dp, primeTwo+1, 0);
+        
+        // if(max == 0){
+        //     return primeOne-1;
+        // }
+        // return max;
+
+
+
+
+
+        
 
 
 
