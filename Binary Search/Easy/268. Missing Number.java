@@ -35,6 +35,17 @@ class Solution {
         // return nums[nums.length-1] + 1;
 
 
+        
+
+
+        // int totalSum = (nums.length * (nums.length + 1))/2;
+        // int sum = 0;
+
+        // for(Integer i: nums){
+        //     sum += i;
+        // }
+
+        // return totalSum - sum;
 
 
 
