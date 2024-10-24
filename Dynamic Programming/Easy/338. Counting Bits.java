@@ -1,49 +1,78 @@
 class Solution {
-
-    public int countOnes(int n, int[] ans){
-        if(n == 1){
-            return 1;
-        }
-
-        if(ans[n] != 0){
-            return ans[n];
-        }
-
-        if(n % 2 != 0){
-            ans[n] = 1 + countOnes(n/2, ans);
-            return ans[n];
-        }
-        ans[n] = countOnes(n/2, ans);
-        return ans[n];
-    }
-
-    
     public int[] countBits(int n) {
         
-        int[] ans = new int[n+1];
         if(n == 0){
-            return ans;
+            return new int[]{0};
         }
 
-        for(int i = 1; i <= n; i++){
-            // if(i == 1 || i == 2){
-            //     ans[i] = 1;
+        int[] ones = new int[n + 1];
+        ones[0] = 0;
+        ones[1] = 1;
+
+        int multiplier = 2;
+        int compare = 0;
+
+        for(int i = 2; i <= n; i++){
+
+            if(multiplier * 2 == i){
+                multiplier = i;
+            }
+
+            ones[i] = 1 + ones[i - multiplier];
+
+
+            // if(multiplier == i){
+            //     compare = multiplier;
+            //     multiplier *= 2;
             // }
-            // if(ans[i] != 0){
-            //     continue;
-            // }
-            // else{
-            //     if(i % 2 != 0){
-            //         ans[i] += 1 + ans[i/2];
-            //     }
-            //     else{
-            //         ans[i] += ans[i/2];
-            //     }
-            // }
-            
-            ans[i] = countOnes(i, ans);
+            // ones[i] = 1 + ones[i - compare];
         }
 
-        return ans;
+        return ones;
+
+
+
+
+
+
+
+
+        // int[] ones = new int[n+1];
+        // ones[0] = 0;
+
+        // for(int i = 1; i <= n; i++){
+        //     int num = i;
+
+        //     while(num > 0){
+        //         if(ones[num] != 0){
+        //             ones[i] += ones[num];
+        //             break;
+        //         }
+        //         int d = num % 2;
+        //         if(d == 1){
+        //             ones[i]++;
+        //         }
+        //         num = num >> 1;
+        //     }
+        // }
+
+        // return ones;
+
+
+
+
+        
+        // int[] ones = new int[n+1];
+        // ones[0] = 0;
+
+        // for(int i = 1; i <= n; i++){
+        //     int num = i;
+        //     while(num > 0){
+        //         ones[i]++;
+        //         num = num & (num-1);
+        //     }
+        // }
+
+        // return ones;
     }
 }
