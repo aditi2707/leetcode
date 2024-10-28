@@ -13,45 +13,82 @@ class Solution {
 
     public boolean isPalindrome(String s) {
 
-        int i = 0, j = s.length()-1;
-        //s = s.toLowerCase();
+        s = s.toLowerCase();
+        int i = 0, j = s.length() - 1;
 
         while(i < j){
-            char chI = s.charAt(i);
-            char chJ = s.charAt(j);
-
-            if(!Character.isLetterOrDigit(chI)){
+            if(!Character.isLetterOrDigit(s.charAt(i))){
                 i++;
-                continue;
             }
-            if(!Character.isLetterOrDigit(chJ)){
+            else if(!Character.isLetterOrDigit(s.charAt(j))){
                 j--;
-                continue;
-            }
-
-            // if(chI != chJ){
-            //     return false;
-            // }
-
-            if(Character.isLetter(chI) && Character.isLetter(chI)){
-                if(Character.toLowerCase(chI) != Character.toLowerCase(chJ)){
-                    return false; 
-                }
-            }
-            
-            else if(Character.isDigit(chI) && Character.isDigit(chI)){
-                if(chI != chJ){
-                    return false;
-                }
             }
             else{
-                return false;
-            }
-            i++;
-            j--;
+                if(s.charAt(i) != s.charAt(j)){
+                    return false;
+                }
+                else{
+                    i++;
+                    j--;
+                }
+            }  
         }
 
         return true;
+
+
+
+
+
+
+        
+
+        // int i = 0, j = s.length()-1;
+        // //s = s.toLowerCase();
+
+        // while(i < j){
+        //     char chI = s.charAt(i);
+        //     char chJ = s.charAt(j);
+
+        //     if(!Character.isLetterOrDigit(chI)){
+        //         i++;
+        //         continue;
+        //     }
+        //     if(!Character.isLetterOrDigit(chJ)){
+        //         j--;
+        //         continue;
+        //     }
+
+        //     // if(chI != chJ){
+        //     //     return false;
+        //     // }
+
+        //     if(Character.isLetter(chI) && Character.isLetter(chI)){
+        //         if(Character.toLowerCase(chI) != Character.toLowerCase(chJ)){
+        //             return false; 
+        //         }
+        //     }
+            
+        //     else if(Character.isDigit(chI) && Character.isDigit(chI)){
+        //         if(chI != chJ){
+        //             return false;
+        //         }
+        //     }
+        //     else{
+        //         return false;
+        //     }
+        //     i++;
+        //     j--;
+        // }
+
+        // return true;
+
+
+
+
+
+
+        
         
         // String ans = "";
 
