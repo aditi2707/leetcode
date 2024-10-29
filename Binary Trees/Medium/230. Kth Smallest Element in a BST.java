@@ -32,11 +32,43 @@ class Solution {
     }
 
     public int kthSmallest(TreeNode root, int k) {
-        
-        int[] max = {0};
-        int[] count = {k};
-        findSmallest(root, count, max);
 
-        return max[0];
+        Stack<TreeNode> stack = new Stack<>();
+        int n = 0;
+
+        TreeNode curr = root;
+
+        while(curr != null || !stack.isEmpty()){
+
+            while(curr != null){
+                stack.push(curr);
+                curr = curr.left;
+            }
+
+            n += 1;
+            curr = stack.pop();
+
+            if(n == k){
+                return curr.val;
+            }
+
+            curr = curr.right;
+        }
+
+        return 0;
+
+
+
+
+
+
+
+        
+        
+        // int[] max = {0};
+        // int[] count = {k};
+        // findSmallest(root, count, max);
+
+        // return max[0];
     }
 }
