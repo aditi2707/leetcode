@@ -15,6 +15,7 @@ class Solution {
         
         if(curr.word != null && !result.contains(curr.word)){
             result.add(curr.word);
+            curr.word = null;
         }
         
         if(i < 0 || i >= board.length){
