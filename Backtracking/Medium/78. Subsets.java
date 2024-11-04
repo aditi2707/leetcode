@@ -1,26 +1,27 @@
 class Solution {
 
-    public void backtrack(int first, ArrayList<Integer> curr, int[] nums, int k, List<List<Integer>> output) {
+    public void backtracking(int[] nums, List<List<Integer>> ans, List<Integer> temp, int s){
 
-        if (curr.size() == k){
-            output.add(new ArrayList(curr));
+        if(s >= nums.length){
+            ans.add(new ArrayList<>(temp));
+            return;
         }
-        
-        for (int i = first; i < nums.length; ++i) {
-            curr.add(nums[i]);
-            backtrack(i + 1, curr, nums, k, output);
-            curr.remove(curr.size() - 1);
-        }
+
+        temp.add(nums[s]);
+        backtracking(nums, ans, temp, s + 1);
+
+        temp.remove(temp.size() - 1);
+        backtracking(nums, ans, temp, s + 1);
     }
 
+
     public List<List<Integer>> subsets(int[] nums) {
+        
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
 
-        List<List<Integer>> output = new ArrayList();
+        backtracking(nums, ans, temp, 0);
 
-        for (int k = 0; k <= nums.length; ++k) {
-            ArrayList<Integer> currCombo = new ArrayList<Integer>();
-            backtrack(0, currCombo, nums, k, output);
-        }
-        return output;
+        return ans;
     }
 }
