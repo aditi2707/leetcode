@@ -11,3 +11,4 @@
 - new String(charArray) : To sort a string, first convert the string into a char array. Then sort it using Arrays.sort(charArr). Then convert it into the string using new String function.
 - set1.equals(set2) : to compare two hashsets
 - new ArrayList<>(map.values()) : This can convert the hash values which were array lists in itself to a 2D array list.
+- Integer.bitCount(decNum) : Counts the number of set bits (# of 1s) in the binary conversion of that decimal number.
