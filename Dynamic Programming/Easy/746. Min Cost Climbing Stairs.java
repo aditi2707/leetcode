@@ -1,36 +1,64 @@
 class Solution {
 
-    // public int minCost(int[] cost, int n, int[] dp){
+    public int minCost(int i, int[] cost, int[] dp){
 
-    //     if(n-1 == 0 || n-1 == 1){
-    //         return cost[n-1];
-    //     }
-
-    //     if(dp[n-1] != -1){
-    //         return dp[n-1];
-    //     }
-    
-    //     dp[n-1] = cost[n-1] + Math.min(minCost(cost, n-1, dp), minCost(cost, n-2, dp));
-    //     return dp[n-1];
-    // }
-
-    public int minCostClimbingStairs(int[] cost) {
-        
-        int[] dp = new int[cost.length];
-        // for(int i = 0; i < dp.length; i++){
-        //     dp[i] = -1;
-        // }
-
-        dp[0] = cost[0];
-        dp[1] = cost[1];
-        for(int i = 2; i < cost.length; i++){
-
-            dp[i] = cost[i] + Math.min(dp[i-1], dp[i-2]);
+        if(i == 0 || i == 1){
+            return cost[i];
         }
 
-        return Math.min(dp[cost.length-1], dp[cost.length-2]);
+        if(dp[i] != 1000){
+            return dp[i];
+        }
+
+        dp[i] = cost[i] + 
+        Math.min(minCost(i - 1, cost, dp), minCost(i - 2, cost, dp));
+
+        return dp[i];
+    }
+
+    public int minCostClimbingStairs(int[] cost) {
+
+        int prev2 = cost[0];
+        int prev = cost[1];
+
+        for(int i = 2; i < cost.length; i++){
+            int curr = cost[i] + Math.min(prev, prev2);
+            prev2 = prev;
+            prev = curr;
+        }
+
+        return Math.min(prev, prev2);
 
 
-        //return Math.min(minCost(cost, cost.length, dp), minCost(cost, cost.length-1, dp));
+
+
+
+
+
+
+        // int[] dp = new int[cost.length];
+
+        // dp[0] = cost[0];
+        // dp[1] = cost[1];
+
+        // for(int i = 2; i < cost.length; i++){
+        //     dp[i] = cost[i] + Math.min(dp[i - 1], dp[i - 2]);
+        // }
+
+        // return Math.min(dp[cost.length - 1], dp[cost.length - 2]);
+
+
+
+
+
+
+
+        
+        // int[] dp = new int[cost.length];
+
+        // Arrays.fill(dp, 1000);
+
+        // return Math.min(minCost(cost.length - 1, cost, dp), 
+        // minCost(cost.length - 2, cost, dp));
     }
 }
