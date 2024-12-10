@@ -1,33 +1,107 @@
 class Solution {
 
-    public int findMaxMoney(int[] nums, int m, int n, int[] dp){
+    public int findStash(int n, List<Integer> nums, int[] dp){
 
-        if(m > n){
-            return 0;
+        if(n == 0){
+            return nums.get(0);
+        }
+        if(n == 1){
+            return Math.max(nums.get(0), nums.get(1));
         }
 
-        if(dp[m] != -1){
-            return dp[m];
+        int pick = nums.get(0);
+        int notPick = Math.max(nums.get(0), nums.get(1));
+
+        for(int i = 2; i < nums.size(); i++){
+            int choose = nums.get(i) + pick;
+            int notChoose = notPick;
+
+            int curr = Math.max(choose, notChoose);
+            pick = notPick;
+            notPick = curr;
         }
 
-        dp[m] = Math.max(nums[m] + findMaxMoney(nums, m+2, n, dp), findMaxMoney(nums, m+1, n, dp));
-        return dp[m];
+        return notPick;
+
+
+
+
+
+
+        
+
+        // if(n == 0){
+        //     return nums.get(0);
+        // }
+        // if(n == 1){
+        //     return Math.max(nums.get(0), nums.get(1));
+        // }
+
+        // dp[0] = nums.get(0);
+        // dp[1] = Math.max(nums.get(0), nums.get(1));
+
+        // for(int i = 2; i < nums.size(); i++){
+        //     int choose = nums.get(i) + dp[i - 2];
+        //     int notChoose = dp[i - 1];
+
+        //     dp[i] = Math.max(choose, notChoose);
+        // }
+
+        // return dp[nums.size() - 1];
+
+
+
+
+
+
+
+        // if(n == 0){
+        //     return nums.get(0);
+        // }
+        // if(n == 1){
+        //     return Math.max(nums.get(0), nums.get(1));
+        // }
+
+        // if(dp[n] != -1){
+        //     return dp[n];
+        // }
+
+        // int choose = nums.get(n) + findStash(n - 2, nums, dp);
+        // int notChoose = findStash(n - 1, nums, dp);
+
+        // dp[n] = Math.max(choose, notChoose);
+        // return dp[n];
     }
 
+
+
     public int rob(int[] nums) {
-        
+
         if(nums.length == 1){
             return nums[0];
         }
-        if(nums.length == 2){
-            return Math.max(nums[0], nums[1]);
+
+        List<Integer> first = new ArrayList<>();
+        List<Integer> second = new ArrayList<>();
+
+        int[] firstDp = new int[nums.length - 1];
+        int[] secondDp = new int[nums.length - 1];
+
+        Arrays.fill(firstDp, -1);
+        Arrays.fill(secondDp, -1);
+
+        for(int i = 0; i < nums.length; i++){
+            if(i != nums.length - 1){
+                first.add(nums[i]);
+            }
+            if(i != 0){
+                second.add(nums[i]);
+            }
         }
+        
+        int f = findStash(first.size() - 1, first, firstDp);
+        int s = findStash(second.size() - 1, second, secondDp);
 
-        int[] dp1 = new int[nums.length];
-        int[] dp2 = new int[nums.length];
-        Arrays.fill(dp1, -1);
-        Arrays.fill(dp2, -1);
-
-        return Math.max(findMaxMoney(nums, 0, nums.length - 2, dp1), findMaxMoney(nums, 1, nums.length - 1, dp2));
+        return Math.max(f, s);
     }
 }
