@@ -1,56 +1,72 @@
 class Solution {
 
-    public boolean ifCanJump(int[] nums, int m, int[] dp){
+    public boolean jumpGame(int[] nums, int i, int[] dp){
 
-        if(m >= nums.length - 1){
+        if(i == nums.length - 1){
             return true;
         }
-        
-        if(nums[m] == 0 && m != nums.length - 1){
-            return false;
+
+        if(dp[i] != -1){
+            return dp[i] == 1? true : false;
         }
 
-        if(dp[m] != -1){
-            return dp[m] == 1? true : false;
-        }
-
-        for(int i = 1; i <= nums[m]; i++){
-            if(ifCanJump(nums, m + i, dp)){
-                dp[m] = 1;
+        boolean jump = false;
+        for(int j = 1; j <= nums[i] && j < nums.length; j++){
+            jump = jump || jumpGame(nums, i + j, dp);
+            if(jump){
+                dp[j] = 1;
                 return true;
             }
         }
-        
-        dp[m] = 0;
-        return false;
+
+        dp[i] = 0;
+        return jump;
     }
 
     public boolean canJump(int[] nums) {
 
-        // int i = nums.length - 1;
-        // int goal = nums.length - 1;
+        int lastPos = nums.length - 1;
 
-        // while(i >= 0){
-        //     if(nums[i] + i >= goal){
-        //         goal = i;
+        for(int i = nums.length - 1; i >= 0; i--){
+            if(nums[i] + i >= lastPos){
+                lastPos = i;
+            }
+        }
+
+        return lastPos == 0;
+
+
+
+
+
+
+
+
+
+        // int[] dp = new int[nums.length];
+        
+        // dp[nums.length - 1] = 1;
+
+        // for(int i = nums.length - 2; i >= 0; i--){
+        //     int jump = 0;
+        //     for(int j = 1; j <= nums[i]; j++){
+        //         if(i + j < nums.length){
+        //             jump = jump | dp[i + j];
+        //         }
         //     }
-        //     i--;
+        //     dp[i] = jump;
         // }
 
-        // if(goal == 0){
-        //     return true;
-        // }
-
-        // return false;
+        // return dp[0] == 1? true : false;
 
 
 
 
 
+        
+        // int[] dp = new int[nums.length];
+        // Arrays.fill(dp, -1);
 
-        int[] dp = new int[nums.length];
-
-        Arrays.fill(dp, -1);
-        return ifCanJump(nums, 0, dp);
+        // return jumpGame(nums, 0, dp);
     }
 }
