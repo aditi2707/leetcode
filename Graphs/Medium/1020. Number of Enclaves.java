@@ -28,19 +28,20 @@ class Solution {
         int enclaves = 0;
 
         for(int j = 0; j < grid[0].length; j++){
-            if(grid[0][j] == 1){
+            if(grid[0][j] == 1 && visited[0][j] == 0){
                 dfs(grid, visited, 0, j);
             }
-            if(grid[grid.length - 1][j] == 1){
+            if(grid[grid.length - 1][j] == 1 && visited[grid.length - 1][j] == 0){
                 dfs(grid, visited, grid.length - 1, j);
             }
         }
 
         for(int i = 0; i < grid.length; i++){
-            if(grid[i][0] == 1){
+            if(grid[i][0] == 1 && visited[i][0] == 0){
                 dfs(grid, visited, i, 0);
             }
-            if(grid[i][grid[0].length - 1] == 1){
+            if(grid[i][grid[0].length - 1] == 1 && 
+            visited[i][grid[0].length - 1] == 0){
                 dfs(grid, visited, i, grid[0].length - 1);
             }
         }
