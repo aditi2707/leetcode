@@ -1,22 +1,26 @@
 class Solution {
 
-    public void dfs(int k, int[] visited, List<List<Integer>> list, int[] count){
+    private void dfs(List<List<Integer>> list, int[] visited, int source, int[] g){
 
-        visited[k] = 1;
-        count[0]++;
+        visited[source] = 1;
+        g[0]++;
 
-        for(int i = 0; i < list.get(k).size(); i++){
-            count[1]++;
-            if(visited[list.get(k).get(i)] == 0){
-                dfs(list.get(k).get(i), visited, list, count);
+        for(Integer i: list.get(source)){
+            g[1]++;
+            if(visited[i] == 0){
+                dfs(list, visited, i, g);
             }
         }
+
+        return;
     }
+
 
     public int countCompleteComponents(int n, int[][] edges) {
         
-        int counter = 0;
+        int count = 0;
         int[] visited = new int[n];
+
         List<List<Integer>> list = new ArrayList<>();
 
         for(int i = 0; i < n; i++){
@@ -30,16 +34,19 @@ class Solution {
 
         for(int i = 0; i < n; i++){
             if(visited[i] == 0){
-                int[] count = new int[2];
-                dfs(i, visited, list, count);
-                count[1] /= 2;
-                if((count[0] * (count[0]-1)) == 2 * count[1]){
-                    counter++;
+                int[] g = {0, 0};
+                dfs(list, visited, i, g);
+
+                // for undirected: e /= 2
+                // for directed: e
+                // v * (v - 1) == e
+
+                if(g[0] * (g[0] - 1) == g[1]){
+                    count++;
                 }
             }
-            
         }
 
-        return counter;
+        return count;
     }
 }
