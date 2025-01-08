@@ -4,18 +4,25 @@ class FileSystem {
 
     public FileSystem() {
         map = new HashMap<>();
+        map.put("", 0);
     }
     
     public boolean createPath(String path, int value) {
         
         String parent = path.substring(0, path.lastIndexOf("/"));
-        if(map.containsKey(path) || 
-        (!map.containsKey(parent) && path.indexOf("/") != path.lastIndexOf("/"))){
+        int firstSlash = path.indexOf("/");
+        int lastSlash = path.lastIndexOf("/");
+
+        if(!map.containsKey(parent) || map.containsKey(path)){
             return false;
         }
+
+        // if(map.containsKey(path) || 
+        // (!map.containsKey(parent) && firstSlash != lastSlash)){
+        //     return false;
+        // }
         
         map.put(path, value);
-
         return true;
     }
     
