@@ -1,58 +1,58 @@
 class Solution {
 
-    public int fallingPathSum(int i, int j, int[][] matrix, int[][] dp){
+    private int fallingPathSum(int[][] matrix, int i, int j, int[][] dp){
 
-        if(j < 0 || j >= matrix.length){
-            return 10001;
+        if(j < 0 || j >= matrix[0].length){
+            return 10000;
         }
-        if(i == 0){
+        if(i == matrix.length - 1){
             return matrix[i][j];
         }
 
-        if(dp[i][j] != -10001){
+        if(dp[i][j] != -1){
             return dp[i][j];
         }
 
-        int up = matrix[i][j] + fallingPathSum(i - 1, j, matrix, dp);
-        int diagL = matrix[i][j] + fallingPathSum(i - 1, j - 1, matrix, dp);
-        int diagR = matrix[i][j] + fallingPathSum(i - 1, j + 1, matrix, dp);
+        int diagRight = matrix[i][j] + fallingPathSum(matrix, i + 1, j + 1, dp);
+        int down = matrix[i][j] + fallingPathSum(matrix, i + 1, j, dp);
+        int diagLeft = matrix[i][j] + fallingPathSum(matrix, i + 1, j - 1, dp);
 
-        dp[i][j] = Math.min(up, Math.min(diagL, diagR));
+        dp[i][j] = Math.min(diagRight, Math.min(down, diagLeft));
         return dp[i][j];
     }
 
     public int minFallingPathSum(int[][] matrix) {
 
-        int min = 10001;
-        int[] prev = new int[matrix.length];
+        int min = 10000;
+        int[] prev = new int[matrix[0].length];
 
-        for(int j = 0; j < matrix.length; j++){
-            prev[j] = matrix[0][j];
+        for(int i = 0; i < matrix[0].length; i++){
+            prev[i] = matrix[0][i];
         }
 
         for(int i = 1; i < matrix.length; i++){
-            int[] curr = new int[matrix.length];
-            int diagL = 10001, diagR = 10001;
-            for(int j = 0; j < matrix.length; j++){
-                int up = matrix[i][j] + prev[j];
+            int[] curr = new int[matrix[0].length];
+            for(int j = 0; j < matrix[0].length; j++){
 
-                if(j > 0){
-                    diagL = matrix[i][j] + prev[j - 1];
+                int diagRight = 10000;
+                int diagLeft = 10000;
+
+                if(j + 1 < matrix[0].length){
+                    diagRight = matrix[i][j] + prev[j + 1];
                 }
-                if(j < matrix.length - 1){
-                    diagR = matrix[i][j] + prev[j + 1];
+                int down = matrix[i][j] + prev[j];
+                if(j - 1 >= 0){
+                    diagLeft = matrix[i][j] + prev[j - 1];
                 }
 
-                curr[j] = Math.min(up, Math.min(diagR, diagL));
+                curr[j] = Math.min(diagRight, Math.min(down, diagLeft));
             }
-
             prev = curr;
         }
 
-        for(int j = 0; j < prev.length; j++){
-            min = Math.min(min, prev[j]);
+        for(int i = 0; i < matrix[0].length; i++){
+            min = Math.min(min, prev[i]);
         }
-
 
         return min;
 
@@ -61,55 +61,52 @@ class Solution {
 
 
 
+        // int min = 10000;
+        // int[][] dp = new int[matrix.length][matrix[0].length];
 
-
-
-        // int min = 10001;
-        // int[][] dp = new int[matrix.length][matrix.length];
-
-        // for(int j = 0; j < matrix.length; j++){
-        //     dp[0][j] = matrix[0][j];
+        // for(int i = 0; i < matrix[0].length; i++){
+        //     dp[0][i] = matrix[0][i];
         // }
 
         // for(int i = 1; i < matrix.length; i++){
-        //     int diagL = 10001, diagR = 10001;
-        //     for(int j = 0; j < matrix.length; j++){
-        //         int up = matrix[i][j] + dp[i - 1][j];
+        //     for(int j = 0; j < matrix[0].length; j++){
 
-        //         if(j > 0){
-        //             diagL = matrix[i][j] + dp[i - 1][j - 1];
+        //         int diagRight = 10000;
+        //         int diagLeft = 10000;
+
+        //         if(j + 1 < matrix[0].length){
+        //             diagRight = matrix[i][j] + dp[i - 1][j + 1];
         //         }
-        //         if(j < matrix.length - 1){
-        //             diagR = matrix[i][j] + dp[i - 1][j + 1];
+        //         int down = matrix[i][j] + dp[i - 1][j];
+        //         if(j - 1 >= 0){
+        //             diagLeft = matrix[i][j] + dp[i - 1][j - 1];
         //         }
 
-        //         dp[i][j] = Math.min(up, Math.min(diagR, diagL));
+        //         dp[i][j] = Math.min(diagRight, Math.min(down, diagLeft));
         //     }
         // }
 
-        // for(int j = 0; j < dp.length; j++){
-        //     min = Math.min(min, dp[dp.length - 1][j]);
+        // for(int i = 0; i < matrix[0].length; i++){
+        //     min = Math.min(min, dp[matrix.length - 1][i]);
         // }
-
 
         // return min;
 
+
+
+
+
+
         
-
-
-
-
-
-
-        // int min = 10001;
-        // int[][] dp = new int[matrix.length][matrix.length];
+        // int min = 10000;
+        // int[][] dp = new int[matrix.length][matrix[0].length];
 
         // for(int i = 0; i < matrix.length; i++){
-        //     Arrays.fill(dp[i], -10001);
+        //     Arrays.fill(dp[i], -1);
         // }
 
-        // for(int j = 0; j < matrix.length; j++){
-        //     min = Math.min(min, fallingPathSum(matrix.length - 1, j, matrix, dp));
+        // for(int i = 0; i < matrix[0].length; i++){
+        //     min = Math.min(min, fallingPathSum(matrix, 0, i, dp));
         // }
 
         // return min;
