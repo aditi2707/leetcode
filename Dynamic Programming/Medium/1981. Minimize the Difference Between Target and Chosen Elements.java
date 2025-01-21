@@ -20,12 +20,43 @@ class Solution {
 
     public int minimizeTheDifference(int[][] mat, int target) {
 
-        // int[][] dp = new int[mat.length][5001];
-        // int ans = 5000;
+        int[] next = new int[5001];
+        int ans = 5000;
+
+        for(int i = 0; i < 5001; i++){
+            next[i] = Math.abs(target - i);
+        }
+
+        for(int i = mat.length - 1; i >= 0; i--){
+            int[] curr = new int[5001];
+            for(int j = 5000; j >= 0; j--){
+                int min = 5000;
+                for(int k = 0; k < mat[0].length; k++){
+                    if(j + mat[i][k] <= 5000){
+                        min = Math.min(min, next[j + mat[i][k]]);
+                    }
+                }
+                curr[j] = min;
+            }
+            next = curr;
+        }
+
+        return next[0];
+
+
+
+
 
         
-        // for(int i = mat.length - 2; i >= 0; i--){
-        //     for(int j = 0; j < 5001; j++){
+        // int[][] dp = new int[mat.length + 1][5001];
+        // int ans = 5000;
+
+        // for(int i = 0; i < 5001; i++){
+        //     dp[mat.length][i] = Math.abs(target - i);
+        // }
+
+        // for(int i = mat.length - 1; i >= 0; i--){
+        //     for(int j = 5000; j >= 0; j--){
         //         int min = 5000;
         //         for(int k = 0; k < mat[0].length; k++){
         //             if(j + mat[i][k] <= 5000){
@@ -33,13 +64,10 @@ class Solution {
         //             }
         //         }
         //         dp[i][j] = min;
-        //         if(i == 0){
-        //             ans = Math.min(ans, Math.abs(target - dp[0][j]));
-        //         }
         //     }
         // }
 
-        // return ans;
+        // return dp[0][0];
 
 
 
