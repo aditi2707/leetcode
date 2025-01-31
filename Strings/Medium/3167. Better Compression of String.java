@@ -9,7 +9,8 @@ class Solution {
         Space Complexity : O(26 + compressed.length())
         
         Because the frequency array will only have alphabets so 26. We are using separate array to convert the string into an array of characters so 
-        that will be equal to the length of the string. If we do not ignore the output and the output can be of sufficient length, so that will also          be counted. If all the characters are different and each frequency is 10000, then total length can be (26 + 10000 * 26).
+        that will be equal to the length of the string. If we do not ignore the output and the output can be of sufficient length, so that will also  
+        be counted. If all the characters are different and each frequency is 10000, then total length can be (26 + 10000 * 26).
         */
         
 
