@@ -29,16 +29,14 @@ class Solution {
         return list1;
 
 
-        // if(list1 == null && list2 == null){
-        //     return null;
+        
+
+        // if(list2 == null){
+        //     return list1;
         // }
         // if(list1 == null){
         //     return list2;
         // }
-        // if(list2 == null){
-        //     return list1;
-        // }
-
         // if(list1.val <= list2.val){
         //     ListNode temp = list1.next;
         //     list1.next = list2;
@@ -50,8 +48,9 @@ class Solution {
         // ListNode curr2 = list2;
 
         // while(curr1 != null && curr2.next != null){
+
         //     if(curr1.val >= curr2.val){
-        //         if(curr1.val <= curr2.next.val){
+        //         if(curr2.next.val >= curr1.val){
         //             ListNode temp1 = curr1.next;
         //             ListNode temp2 = curr2.next;
         //             curr2.next = curr1;
@@ -61,6 +60,9 @@ class Solution {
         //         else{
         //             curr2 = curr2.next;
         //         }
+        //     }
+        //     else{
+        //         curr2 = curr2.next;
         //     }
         // }
 
