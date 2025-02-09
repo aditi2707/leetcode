@@ -1,5 +1,11 @@
 class Solution {
     public boolean isValid(String s) {
+
+        // Time Complexity : O(n) because the stack operations done here are of
+        // constant time.
+
+        // Space Complexity : O(n)
+        
         
         Stack<Character> stack = new Stack<>();
         int i = 1;
