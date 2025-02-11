@@ -1,6 +1,12 @@
 class Solution {
     public String breakPalindrome(String palindrome) {
         
+        // Time Complexity : O(n / 2 + n). Because the .toCharArray() takes linear 
+        // time.
+
+        // Space Complexity : O(n)
+
+
         if(palindrome.length() == 1){
             return "";
         }
