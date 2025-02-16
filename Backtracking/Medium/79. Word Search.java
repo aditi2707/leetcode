@@ -1,43 +1,60 @@
 class Solution {
 
-    public boolean findWord(char[][] board, String word, int ind, int i, int j, int[][] visited){
+    private boolean backtracking(char[][] board, String word, int ind, 
+    int m, int n, int[][] visited){
 
         if(ind == word.length()){
             return true;
         }
 
-        if(i >= board.length || i < 0){
-            return false;
-        }
-        if(j >= board[0].length || j < 0){
-            return false;
-        }
-        if(visited[i][j] == 1){
-            return false;
-        }
-        if(word.charAt(ind) != board[i][j]){
+        if(m < 0 || m >= board.length){
             return false;
         }
 
-        visited[i][j] = 1;
+        if(n < 0 || n >= board[0].length){
+            return false;
+        }
 
-        boolean result = findWord(board, word, ind+1, i+1, j, visited) || findWord(board, word, ind+1, i, j+1, visited) || findWord(board, word, ind+1, i-1, j, visited) || findWord(board, word, ind+1, i, j-1, visited);
-        visited[i][j] = 0;
+        if(visited[m][n] == 1 || board[m][n] != word.charAt(ind)){
+            return false;
+        }
 
-        return result;
+        visited[m][n] = 1;
+
+        boolean up = backtracking(board, word, ind + 1, m - 1, n, visited);
+        boolean down = backtracking(board, word, ind + 1, m + 1, n, visited);
+        boolean left = backtracking(board, word, ind + 1, m, n - 1, visited);
+        boolean right = backtracking(board, word, ind + 1, m, n + 1, visited);
+
+        visited[m][n] = 0;
+
+        return up || down || left || right;
     }
 
+
     public boolean exist(char[][] board, String word) {
+
+        // Time Complexity : O(m * n * (4 ^ word_length)), where m = length of row 
+        // and n = length of col of board. 
+        // The for loop will run for every character in board, so that will be 
+        // m * n. In the backtracking(), for every choice, we have 4 directions. 
+        // And those 4 directions can only be chosen if the character is present in
+        // word, so the function will run for a max of length of word, but since 
+        // each character has 4 choices, then TC becomes 4 ^ word_length.
+
+        // Space Complexity : O(m * n), for the visited[][].
+        
         
         int[][] visited = new int[board.length][board[0].length];
 
         for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board[i].length; j++){
-                if(findWord(board, word, 0, i, j, visited)){
+            for(int j = 0; j < board[0].length; j++){
+                if(backtracking(board, word, 0, i, j, visited)){
                     return true;
                 }
             }
         }
+
         return false;
     }
 }
