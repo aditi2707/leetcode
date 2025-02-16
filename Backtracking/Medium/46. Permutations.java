@@ -1,67 +1,87 @@
-// Time Complexity : O(n * n!)
-// Because the number of permutations for each value will be n!. For n values, it would be n * n!.
-// Space Complexity : O(n + n^2)
-// If the output array is ignored, then array temp is being used which has a space complexity of O(n).
-
 class Solution {
 
-    private void backtracking(int[] nums, int start, List<Integer> temp, 
-    List<List<Integer>> ans){
+    private void backtracking(int[] nums, List<List<Integer>> ans, int ind){
+
+        if(ind == nums.length){
+            List<Integer> temp = new ArrayList<>();
+            for(Integer i: nums){
+                temp.add(i);
+            }
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+
+        for(int i = ind; i < nums.length; i++){
+            int temp = nums[ind];
+            nums[ind] = nums[i];
+            nums[i] = temp;
+
+            backtracking(nums, ans, ind + 1);
+
+            temp = nums[ind];
+            nums[ind] = nums[i];
+            nums[i] = temp;
+        }
+
+        return;
+    }
+
+
+    private void backtracking(int[] nums, List<List<Integer>> ans, 
+    List<Integer> temp){
 
         if(temp.size() == nums.length){
             ans.add(new ArrayList<>(temp));
             return;
         }
 
-        for(int i = start; i < nums.length; i++){
+        for(int i = 0; i < nums.length; i++){
             if(!temp.contains(nums[i])){
                 temp.add(nums[i]);
-                backtracking(nums, 0, temp, ans);
+                backtracking(nums, ans, temp);
                 temp.remove(temp.size() - 1);
             }
         }
 
         return;
     }
-    
 
-    public void findPermute(int[] nums, int start, List<List<Integer>> ans){
-        
-        if(start == nums.length-1){
-            List<Integer> arr = new ArrayList<>();
-            for(Integer i: nums){
-                arr.add(i);
-            }
-            ans.add(arr);
-            return;
-        }
-
-        for(int i = start; i < nums.length; i++){
-
-            int temp = nums[start];
-            nums[start] = nums[i];
-            nums[i] = temp;
-
-            findPermute(nums, start+1, ans);
-            temp = nums[start];
-            nums[start] = nums[i];
-            nums[i] = temp;
-        }
-    }
 
     public List<List<Integer>> permute(int[] nums) {
 
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
+        // Time Complexity : O(n * n!).
+        // The swaps will take O(1) TC. The for loop in the backtracking() will run 
+        // for all array elements, so that will be O(n). The swaps done for each 
+        // element will be equal to its factorial, so that becomes O(n!).
+        // Hence TC is O(n * n!).
 
-        backtracking(nums, 0, temp, ans);
+        // Space Complexity : O(1) (if we ignore the SC of the output array and the
+        // recursion stack).
+
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        backtracking(nums, ans, 0);
 
         return ans;
 
-        
+
+
+
+
+        // Time Complexity : O(n * n!).
+        // The for loop in the backtracking() will run for all array elements, so 
+        // that will be O(n). But the function will be called only when a permutation
+        // is possible. So that makes O(n!). Hence TC is O(n * n!).
+
+        // Space Complexity : O(n) (if we ignore the SC of the output array and the
+        // recursion stack).
+        // The temp array will have a maximum of all array elements, so O(n).
+
         
         // List<List<Integer>> ans = new ArrayList<>();
-        // findPermute(nums, 0, ans);
+
+        // backtracking(nums, ans, new ArrayList<>());
 
         // return ans;
     }
