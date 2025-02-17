@@ -33,6 +33,16 @@ class Solution {
 
 
     public List<List<Integer>> subsets(int[] nums) {
+
+        // Time Complexity : O(n * 2^n).
+        // For every element in the array, there are two choices, either you take
+        // that element or not. So the TC is 2^n. But those choices are for every
+        // element, so TC is n * 2^n.
+
+        // Space Complexity : O(n) (if we ignore output array and the recursion
+        // stack.)
+        // The temp array will have a max of all array elements so SC is O(n).
+        
         
         List<List<Integer>> ans = new ArrayList<>();
 
