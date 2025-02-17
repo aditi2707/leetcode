@@ -1,37 +1,31 @@
 class Solution {
 
-    private void backtracking(int[] nums, int start, List<Integer> temp, 
-    List<List<Integer>> ans){
+    private void backtracking(int[] nums, List<List<Integer>> ans, 
+    List<Integer> temp, int ind){
 
-        if(start == nums.length){
+        if(ind == nums.length){
             ans.add(new ArrayList<>(temp));
             return;
         }
 
-        temp.add(nums[start]);
-        backtracking(nums, start + 1, temp, ans);
+        temp.add(nums[ind]);
+        backtracking(nums, ans, temp, ind + 1);
         temp.remove(temp.size() - 1);
-        backtracking(nums, start + 1, temp, ans);
+        backtracking(nums, ans, temp, ind + 1);
 
         return;
     }
 
 
-    // private void backtracking(int[] nums, int start, List<Integer> temp, 
-    // List<List<Integer>> ans){
+    // private void backtracking(int[] nums, List<List<Integer>> ans, 
+    // List<Integer> temp, int ind){
 
-    //     if(start == nums.length){
-    //         if(!ans.contains(temp)){
-    //             ans.add(new ArrayList<>(temp));
-    //         }
-    //         return;
-    //     }
+    //     ans.add(new ArrayList<>(temp));
 
-    //     for(int i = start; i < nums.length; i++){
+    //     for(int i = ind; i < nums.length; i++){
     //         temp.add(nums[i]);
-    //         backtracking(nums, i + 1, temp, ans);
+    //         backtracking(nums, ans, temp, i + 1);
     //         temp.remove(temp.size() - 1);
-    //         backtracking(nums, i + 1, temp, ans);
     //     }
 
     //     return;
@@ -41,9 +35,8 @@ class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         
         List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
 
-        backtracking(nums, 0, temp, ans);
+        backtracking(nums, ans, new ArrayList<>(), 0);
 
         return ans;
     }
