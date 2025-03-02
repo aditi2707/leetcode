@@ -15,20 +15,19 @@ class Solution {
         return true;
     }
 
-    private void backtracking(String s, List<List<String>> ans, List<String> temp,  
-    int start, boolean[][] dp){
+    private void backtracking(List<List<String>> ans, String s, List<String> temp, 
+    int index){
 
-        if(start == s.length()){
+        if(index == s.length()){
             ans.add(new ArrayList<>(temp));
             return;
         }
 
-        for(int end = start; end < s.length(); end++){
-            if(s.charAt(start) == s.charAt(end) && 
-            ((end - start <= 2) || dp[start + 1][end - 1])){
-                dp[start][end] = true;
-                temp.add(s.substring(start, end + 1));
-                backtracking(s, ans, temp, end + 1, dp);
+        for(int i = index; i < s.length(); i++){
+            String str = s.substring(index, i + 1);
+            if(isPalindrome(str)){
+                temp.add(str);
+                backtracking(ans, s, temp, i + 1);
                 temp.remove(temp.size() - 1);
             }
         }
@@ -36,19 +35,20 @@ class Solution {
         return;
     }
 
+    private void backtracking(List<List<String>> ans, String s, List<String> temp, 
+    int index, boolean[][] dp){
 
-    private void backtracking(String s, List<List<String>> ans, List<String> temp,  
-    int ind){
-
-        if(ind == s.length()){
+        if(index == s.length()){
             ans.add(new ArrayList<>(temp));
             return;
         }
 
-        for(int i = ind; i < s.length(); i++){
-            if(isPalindrome(s.substring(ind, i + 1))){
-                temp.add(s.substring(ind, i + 1));
-                backtracking(s, ans, temp, i + 1);
+        for(int i = index; i < s.length(); i++){
+            if(s.charAt(index) == s.charAt(i) && 
+            ((i - index <= 2) || dp[index + 1][i - 1])){
+                dp[index][i] = true;
+                temp.add(s.substring(index, i + 1));
+                backtracking(ans, s, temp, i + 1, dp);
                 temp.remove(temp.size() - 1);
             }
         }
@@ -59,18 +59,44 @@ class Solution {
 
     public List<List<String>> partition(String s) {
 
-        boolean[][] dp = new boolean[s.length()][s.length()];
-        List<List<String>> ans = new ArrayList<>();
+        // Time Complexity : O((n * (2 ^ n))). 
+        // The for loop in backtracking() will run for the length of the string 
+        // so TC = O(n). For each character, there are two choices, either the 
+        // string is a palindrome or it is not. So that gives another n choices. 
+        // Hence, TC = O(2 ^ n).
 
-        backtracking(s, ans, new ArrayList<>(), 0, dp);
+        // Space Complexity : O(n + n + n * n) (if we ignore the output array).
+        // The temp array will take a maximum of string length strings. The 
+        // dp array has max dimensions of string_length * string_length.
+        // The recursion stack can have a maximum of length of string space.
+        
+        
+        List<List<String>> ans = new ArrayList<>();
+        boolean[][] dp = new boolean[s.length()][s.length()];
+
+        backtracking(ans, s, new ArrayList<>(), 0, dp);
 
         return ans;
 
 
-    
+
+
+
+        // // Time Complexity : O((n * (2 ^ n)) * n/2). 
+        // // The for loop in backtracking() will run for the length of the string 
+        // // so TC = O(n). For each character, there are two choices, either the 
+        // // string is a palindrome or it is not. So that gives another n choices. 
+        // // Hence, TC = O(2 ^ n). The isPalindrome() will run for half length of 
+        // // the string, so TC = O(n / 2).
+
+        // // Space Complexity : O(n + n) (if we ignore the output array).
+        // // The temp array will take a maximum of string length strings. The 
+        // // recursion stack can have a maximum of length of string space.
+
+        
         // List<List<String>> ans = new ArrayList<>();
 
-        // backtracking(s, ans, new ArrayList<>(), 0);
+        // backtracking(ans, s, new ArrayList<>(), 0);
 
         // return ans;
     }
