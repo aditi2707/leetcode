@@ -1,33 +1,38 @@
 class Solution {
 
-    public void backtracking(int[] candidates, List<List<Integer>> ans, List<Integer> temp, int sum, int i){
+    private void backtracking(List<List<Integer>> ans, List<Integer> temp, 
+    int[] candidates, int target, int sum, int index){
 
-        if(i >= candidates.length){
-            return;
-        }
-        if(sum == 0){
+        if(sum == target){
             ans.add(new ArrayList<>(temp));
             return;
         }
-        if(sum < 0){
+        if(index == candidates.length || sum > target){
             return;
         }
 
-        temp.add(candidates[i]);
-        backtracking(candidates, ans, temp, sum - candidates[i], i);
-
+        temp.add(candidates[index]);
+        backtracking(ans, temp, candidates, target, sum + candidates[index], index);
         temp.remove(temp.size() - 1);
-        backtracking(candidates, ans, temp, sum, i + 1);
+        backtracking(ans, temp, candidates, target, sum, index + 1);
+
+        return;
     }
 
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
 
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-        int sum = 0; 
+        // Time Complexity : O(2 ^ target).
+        // Each element has two choices, either to select or not select. And it will
+        // go until the target value. So the height is target. Hence 
+        // TC = O(2 ^ target).
 
-        backtracking(candidates, ans, temp, target, 0);
+        // Space Complexity : O(n) (if we ignore the output array).
+        
+        
+        List<List<Integer>> ans = new ArrayList<>();
+
+        backtracking(ans, new ArrayList<>(), candidates, target, 0, 0);
 
         return ans;
     }
