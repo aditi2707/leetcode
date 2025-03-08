@@ -1,22 +1,40 @@
 class Solution {
 
-    public void backtracking(String digits, Map<Character, String> map, List<String> ans, String temp, int s){
+        private void backtracking(List<String> ans, Map<Character, String> map, 
+    String digits, String str, int index){
 
-        if(temp.length() == digits.length()){
-            ans.add(new String(temp));
+        if(index == digits.length()){
+            ans.add(str);
             return;
         }
 
-        for(int i = 0; i < map.get(digits.charAt(s)).length(); i++){
-            temp += map.get(digits.charAt(s)).charAt(i);
-            backtracking(digits, map, ans, temp, s + 1);
-            temp = temp.substring(0, temp.length() - 1);
-        }
+        for(char c: map.get(digits.charAt(index)).toCharArray()){
+                str += c;
+                backtracking(ans, map, digits, str, index + 1);
+                str = str.substring(0, str.length() - 1);
+            }
+
+        return;
     }
+
+
     public List<String> letterCombinations(String digits) {
+
+        // Time Complexity : O(4 ^ n).
+        // Each digit has either 3 or 4 letters mapped to it. So if the worst case is
+        // considered, then each letter has 4 choices so for a length of n, this will
+        // be equal to 4 ^ n.
+
+        // Space Complexity : O(32) (if we ignore the output array).
+        
+
+        List<String> ans = new ArrayList<>();
+
+        if(digits.length() == 0){
+            return ans;
+        }
         
         Map<Character, String> map = new HashMap<>();
-        List<String> ans = new ArrayList<>();
 
         map.put('2', "abc");
         map.put('3', "def");
@@ -27,12 +45,9 @@ class Solution {
         map.put('8', "tuv");
         map.put('9', "wxyz");
 
-        if(digits.equals("")){
-            return ans;
-        }
-
-        backtracking(digits, map, ans, "", 0);
+        backtracking(ans, map, digits, "", 0);
 
         return ans;
+
     }
 }
