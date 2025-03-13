@@ -1,31 +1,34 @@
 class Solution {
 
-    public void backtracking(int[] nums, List<List<Integer>> ans, List<Integer> temp, int i){
+    private void backtracking(List<List<Integer>> ans, List<Integer> temp, 
+    int[] nums, int index){
 
-        if(i >= nums.length){
+        if(index == nums.length){
             ans.add(new ArrayList<>(temp));
             return;
         }
 
-        temp.add(nums[i]);
-        backtracking(nums, ans, temp, i + 1);
-
+        temp.add(nums[index]);
+        backtracking(ans, temp, nums, index + 1);
         temp.remove(temp.size() - 1);
 
-        while(i + 1 < nums.length && nums[i] == nums[i+1]){
-            i += 1;
+        while(index + 1 < nums.length && nums[index] == nums[index + 1]){
+            index += 1;
         }
-        backtracking(nums, ans, temp, i + 1);
+
+        backtracking(ans, temp, nums, index + 1);
+
+        return;
     }
+
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         
+        List<List<Integer>> ans = new ArrayList<>();
+
         Arrays.sort(nums);
 
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-
-        backtracking(nums, ans, temp, 0);
+        backtracking(ans, new ArrayList<>(), nums, 0);
 
         return ans;
     }
