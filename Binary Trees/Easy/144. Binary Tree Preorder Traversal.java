@@ -15,18 +15,39 @@
  */
 class Solution {
 
-    public void preOrder(TreeNode root, List<Integer> arr){
-        if(root != null){
-            arr.add(root.val);
-            preOrder(root.left, arr);
-            preOrder(root.right, arr);
-        }
-    }
-    public List<Integer> preorderTraversal(TreeNode root) {
-        
-        List<Integer> arr = new ArrayList<>();
-        preOrder(root, arr);
+    private void preorder(TreeNode root, List<Integer> ans){
 
-        return arr;
+        if(root == null){
+            return;
+        }
+
+        ans.add(root.val);
+        preorder(root.left, ans);
+        preorder(root.right, ans);
+
+        return;
+    }
+
+
+    public List<Integer> preorderTraversal(TreeNode root) {
+
+        // Time Complexity : O(log n)(best case) and O(n)(worst case), where n is the
+        // number of nodes.
+        // The function will traverse every node exactly once. In the best case, the
+        // tree is perfectly balanced which gives a TC of O(height) of the tree, 
+        // hence O(log n). In the worst case when the tree is completely skewed, 
+        // then the height becomes the total number of nodes, hence TC is O(n).
+
+        // Space Complexity : O(n + n), where n is the number of nodes.
+        // If the tree is skewed, then the recursion stack can hold all the nodes at
+        // one moment. So, SC becomes O(n). An output array is used to store the 
+        // result which will store all the nodes.
+        
+        
+        List<Integer> ans = new ArrayList<>();
+
+        preorder(root, ans);
+
+        return ans;
     }
 }
