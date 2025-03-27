@@ -1,54 +1,45 @@
 class Solution {
 
-    public int findMinPath(int i, int j, int[][] grid, int[][] dp){
+    private int findMinSum(int[][] grid, int m, int n, int[][] dp){
 
-        if(i < 0 || j < 0){
+        if(m == grid.length - 1 && n == grid[0].length - 1){
+            return grid[m][n];
+        }
+
+        if(m >= grid.length || n >= grid[0].length){
             return 40001;
         }
-        if(i == 0 && j == 0){
-            return grid[0][0];
+
+        if(dp[m][n] != 40001){
+            return dp[m][n];
         }
 
-        if(dp[i][j] != -1){
-            return dp[i][j];
-        }
+        int down = grid[m][n] + findMinSum(grid, m + 1, n, dp);
+        int right = grid[m][n] + findMinSum(grid, m, n + 1, dp);
 
-        int up = grid[i][j] + findMinPath(i - 1, j, grid, dp);
-        int left = grid[i][j] + findMinPath(i, j - 1, grid, dp);
-
-        dp[i][j] = Math.min(up, left);
-        return dp[i][j];
+        return dp[m][n] = Math.min(down, right);
     }
+
 
     public int minPathSum(int[][] grid) {
 
         int[] prev = new int[grid[0].length];
 
-        for(int i = 0; i < grid.length; i++){
+        prev[0] = grid[0][0];
+
+        for(int i = 1; i < grid[0].length; i++){
+            prev[i] = grid[0][i] + prev[i - 1];
+        }
+
+        for(int i = 1; i < grid.length; i++){
             int[] curr = new int[grid[0].length];
-            int up = 0, left = 0;
-            for(int j = 0; j < grid[0].length; j++){
-                if(i == 0 && j == 0){
-                    curr[0] = grid[0][0];
-                    continue;
-                }
+            curr[0] = grid[i][0] + prev[0];
+            for(int j = 1; j < grid[0].length; j++){
+                int down = grid[i][j] + prev[j];
+                int right = grid[i][j] + curr[j - 1];
 
-                if(i > 0){
-                    up = grid[i][j] + prev[j];
-                }
-                else{
-                    up = 40001;
-                }
-                if(j > 0){
-                    left = grid[i][j] + curr[j - 1];
-                }
-                else{
-                    left = 40001;
-                }
-
-                curr[j] = Math.min(up, left);
+                curr[j] = Math.min(down, right);
             }
-
             prev = curr;
         }
 
@@ -57,33 +48,23 @@ class Solution {
 
 
 
-
-
-
         // int[][] dp = new int[grid.length][grid[0].length];
 
-        // for(int i = 0; i < grid.length; i++){
-        //     int up = 0, left = 0;
-        //     for(int j = 0; j < grid[0].length; j++){
-        //         if(i == 0 && j == 0){
-        //             dp[0][0] = grid[0][0];
-        //             continue;
-        //         }
+        // dp[0][0] = grid[0][0];
 
-        //         if(i > 0){
-        //             up = grid[i][j] + dp[i - 1][j];
-        //         }
-        //         else{
-        //             up = 40001;
-        //         }
-        //         if(j > 0){
-        //             left = grid[i][j] + dp[i][j - 1];
-        //         }
-        //         else{
-        //             left = 40001;
-        //         }
+        // for(int i = 1; i < grid[0].length; i++){
+        //     dp[0][i] = dp[0][i - 1] + grid[0][i];
+        // }
+        // for(int i = 1; i < grid.length; i++){
+        //     dp[i][0] = dp[i - 1][0] + grid[i][0];
+        // }
 
-        //         dp[i][j] = Math.min(up, left);
+        // for(int i = 1; i < grid.length; i++){
+        //     for(int j = 1; j < grid[0].length; j++){
+        //         int down = grid[i][j] + dp[i - 1][j];
+        //         int right = grid[i][j] + dp[i][j - 1];
+
+        //         dp[i][j] = Math.min(down, right);
         //     }
         // }
 
@@ -93,15 +74,12 @@ class Solution {
 
 
 
-
-
-
         // int[][] dp = new int[grid.length][grid[0].length];
 
         // for(int i = 0; i < grid.length; i++){
-        //     Arrays.fill(dp[i], -1);
+        //     Arrays.fill(dp[i], 40001);
         // }
-
-        // return findMinPath(grid.length - 1, grid[0].length - 1, grid, dp);
+        
+        // return findMinSum(grid, 0, 0, dp);
     }
 }
