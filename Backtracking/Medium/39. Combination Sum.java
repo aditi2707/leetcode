@@ -1,5 +1,30 @@
 class Solution {
 
+    private void backtracking(int[] candidates, List<List<Integer>> ans, 
+    List<Integer> temp, int index, int target){
+
+        if(target == 0){
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+
+        if(index == candidates.length){
+            return;
+        }
+
+        for(int i = index; i < candidates.length; i++){
+            if(target - candidates[i] >= 0){
+                temp.add(candidates[i]);
+                backtracking(candidates, ans, temp, i, target - candidates[i]);
+                temp.remove(temp.size() - 1);
+            }
+        }
+
+        return;
+    }
+
+    
+
     private void backtracking(List<List<Integer>> ans, List<Integer> temp, 
     int[] candidates, int target, int sum, int index){
 
