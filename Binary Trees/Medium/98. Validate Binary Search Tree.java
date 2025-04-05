@@ -15,46 +15,91 @@
  */
 class Solution {
 
-    public boolean isValidTree(TreeNode root, TreeNode lower, TreeNode upper){
+    private boolean isValidBST(TreeNode root, TreeNode min, TreeNode max){
 
         if(root == null){
             return true;
         }
 
-        if(lower != null && root.val <= lower.val || upper != null && root.val >= upper.val){
+        if(min != null && root.val <= min.val || 
+        max != null && root.val >= max.val){
             return false;
         }
 
-        return isValidTree(root.left, lower, root) && isValidTree(root.right, root, upper);
+        return isValidBST(root.left, min, root) && 
+        isValidBST(root.right, root, max);
+
     }
 
-    public void inorder(TreeNode root, List<Integer> arr){
 
-        if(root != null){
-            inorder(root.left, arr);
-            arr.add(root.val);
-            inorder(root.right, arr);
+    private boolean isValidBST(TreeNode root, long min, long max){
+
+        if(root == null){
+            return true;
         }
+
+        if(root.val <= (long)min || root.val >= (long)max){
+            return false;
+        }
+
+        return isValidBST(root.left, min, root.val) && 
+        isValidBST(root.right, root.val, max);
+
     }
+
+
+    private void inorder(TreeNode root, List<Integer> list){
+
+        if(root == null){
+            return;
+        }
+
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
+
+        return;
+    }
+
 
     public boolean isValidBST(TreeNode root) {
 
-        TreeNode lower = null;
-        TreeNode upper = null;
+        // // Time Complexity : O(n)
 
-        return isValidTree(root, lower, upper);
-
+        // // Space Complexity : O(n) (considering the recursion stack space)
 
 
+        TreeNode min = null;
+        TreeNode max = null;
+
+        return isValidBST(root, min, max);
 
 
+
+        // // Time Complexity : O(n)
+
+        // // Space Complexity : O(n) (considering the recursion stack space)
+
+
+        // long min = Long.MIN_VALUE;
+        // long max = Long.MAX_VALUE;
+
+        // return isValidBST(root, min, max);
+
+
+
+
+        // // Time Complexity : O(n * 2)
+
+        // // Space Complexity : O(n * 2) (considering the recursion stack space)
 
         
-        // List<Integer> arr = new ArrayList<>();
-        // inorder(root, arr);
+        // List<Integer> list = new ArrayList<>();
 
-        // for(int i = 0; i < arr.size()-1; i++){
-        //     if(arr.get(i) >= arr.get(i+1)){
+        // inorder(root, list);
+
+        // for(int i = 1; i < list.size(); i++){
+        //     if(list.get(i) <= list.get(i - 1)){
         //         return false;
         //     }
         // }
