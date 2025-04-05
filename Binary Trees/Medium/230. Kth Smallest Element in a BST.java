@@ -15,26 +15,42 @@
  */
 class Solution {
 
-    public void findSmallest(TreeNode root, int[] count, int[] max){
+    private void inorder(TreeNode root, int[] k, int[] ans){
 
         if(root == null){
             return;
         }
 
-        findSmallest(root.left, count, max);
+        inorder(root.left, k, ans);
+        if(k[0] == 1){
+            ans[0] = root.val;
+        }
+        k[0]--;
+        inorder(root.right, k, ans);
+    }
 
-        count[0]--;
-        if(count[0] == 0){
-            max[0] = root.val;
+
+    private void inorder(TreeNode root, List<Integer> list){
+
+        if(root == null){
+            return;
         }
 
-        findSmallest(root.right, count, max);
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
+
     }
+
 
     public int kthSmallest(TreeNode root, int k) {
 
+        // Time Complexity : O(height + k)
+
+        // Space Complexity : O(height)
+
+
         Stack<TreeNode> stack = new Stack<>();
-        int n = 0;
 
         TreeNode curr = root;
 
@@ -45,10 +61,10 @@ class Solution {
                 curr = curr.left;
             }
 
-            n += 1;
+            k--;
             curr = stack.pop();
-
-            if(n == k){
+            
+            if(k == 0){
                 return curr.val;
             }
 
@@ -58,17 +74,30 @@ class Solution {
         return 0;
 
 
+        // // Time Complexity : O(n)
+
+        // // Space Complexity : O(1)
+
+
+        // int[] ans = {0};
+        // int[] g = {k};
+
+        // inorder(root, g, ans);
+
+        // return ans[0];
 
 
 
 
+        // // Time Complexity : O(n)
+
+        // // Space Complexity : O(n * 2) (considering the stack space)
 
         
-        
-        // int[] max = {0};
-        // int[] count = {k};
-        // findSmallest(root, count, max);
+        // List<Integer> list = new ArrayList<>();
 
-        // return max[0];
+        // inorder(root, list);
+
+        // return list.get(k - 1);
     }
 }
