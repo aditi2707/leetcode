@@ -1,34 +1,23 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
 
-        // char[] sArr = s.toCharArray();
-        // char[] tArr = t.toCharArray();
+        // Time Complexity : O((n * 2) + 26 + (n * 2))
 
-        // Arrays.sort(sArr);
-        // Arrays.sort(tArr);
+        // Space Complexity : O(26)
 
-        // s = new String(sArr);
-        // t = new String(tArr);
 
-        // if(s.equals(t)){
-        //     return true;
-        // }
-        // return false;
+        int[] freq = new int[26];
 
-        
-        
-        if(s.length() != t.length()){
-            return false;
-        }
-        int[] arr = new int[26];
-
-        for(int i = 0; i < s.length(); i++){
-            arr[s.charAt(i) - 'a'] += 1;
-            arr[t.charAt(i) - 'a'] -= 1;
+        for(char c: s.toCharArray()){
+            freq[c - 'a']++;
         }
 
-        for(int i = 0; i < 26; i++){
-            if(arr[i] != 0){
+        for(char c: t.toCharArray()){
+            freq[c - 'a']--;
+        }
+
+        for(Integer i: freq){
+            if(i != 0){
                 return false;
             }
         }
@@ -37,36 +26,53 @@ class Solution {
 
 
 
-        // HashMap<Character, Integer> map = new HashMap<>();
 
-        // if(s.length() != t.length()){
-        //     return false;
-        // }
+        // // Time Complexity : O(n * 2)
 
-        // for(int i = 0; i < s.length(); i++){
-        //     if(!map.containsKey(s.charAt(i))){
-        //         map.put(s.charAt(i), 1);
+        // // Space Complexity : O(26)
+
+
+        // Map<Character, Integer> map = new HashMap<>();
+
+        // for(char c: s.toCharArray()){
+        //     if(!map.containsKey(c)){
+        //         map.put(c, 1);
         //     }
         //     else{
-        //         map.put(s.charAt(i), map.get(s.charAt(i))+1);
+        //         map.put(c, map.get(c) + 1);
         //     }
         // }
 
-        // for(int i = 0; i < t.length(); i++){
-        //     if(!map.containsKey(t.charAt(i))){
+        // for(char c: t.toCharArray()){
+        //     if(!map.containsKey(c)){
         //         return false;
         //     }
         //     else{
-        //         if(map.get(t.charAt(i)) == 0){
-        //             return false;
-        //         }
-        //         else{
-        //             map.put(t.charAt(i), map.get(t.charAt(i))-1);
+        //         map.put(c, map.get(c) - 1);
+        //         if(map.get(c) == 0){
+        //             map.remove(c);
         //         }
         //     }
         // }
 
-        // return true;
+        // return map.size() == 0;
+
+
+
+
+
         
+        // // Time Complexity : O((nlog n) * 2 + (n * 2))
+
+        // // Space Complexity : O(n * 2)
+
+
+        // char[] c1 = s.toCharArray();
+        // char[] c2 = t.toCharArray();
+
+        // Arrays.sort(c1);
+        // Arrays.sort(c2);
+
+        // return String.valueOf(c1).equals(String.valueOf(c2));
     }
 }
