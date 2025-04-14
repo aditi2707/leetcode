@@ -1,58 +1,63 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
 
-        List<List<String>> ans = new ArrayList<>();
-        Map<String, List<String>> map = new HashMap<>();
+        // Time Complexity : O(m * (n + (26 * 2)))
 
-        for(int i = 0; i < strs.length; i++){
-            char[] c = strs[i].toCharArray();
-            Arrays.sort(c);
-            String s = new String(c);
-            
-            if(!map.containsKey(s)){
-                map.put(s, new ArrayList<>());
+        // Space Complexity : O(m * 2 + 26)
+
+        Map<String, List<String>> map = new HashMap<>();
+        List<List<String>> ans = new ArrayList<>();
+        int[] freq = new int[26];
+
+        for(String s: strs){
+            Arrays.fill(freq, 0);
+            for(char c: s.toCharArray()){
+                freq[c - 'a']++;
             }
-            map.get(s).add(strs[i]);
+            StringBuilder temp = new StringBuilder();
+            for(int i = 0; i < 26; i++){
+                temp.append(freq[i]);
+                temp.append("#");
+            }
+
+            if(!map.containsKey(new String(temp))){
+                map.put(new String(temp), new ArrayList<>());
+            }
+            map.get(new String(temp)).add(s);
         }
 
-        for(List<String> l: map.values()){
-            ans.add(l);
+        for(List<String> list: map.values()){
+            ans.add(list);
         }
 
         return ans;
 
 
 
+        // // Time Complexity : O(m * nlog n + m) (where m = length of array and 
+        // // n = average length of each string).
 
+        // // Space Complexity : O(m * 2)
 
-
-
-
-        // List<List<String>> ans = new ArrayList<>();
+        
         // Map<String, List<String>> map = new HashMap<>();
+        // List<List<String>> ans = new ArrayList<>();
 
-        // for(int i = 0; i < strs.length; i++){
-        //     int[] arr = new int[26];
-        //     String temp = "";
+        // for(String s: strs){
+        //     char[] c = s.toCharArray();
+        //     Arrays.sort(c);
+        //     String sort = new String(c);
 
-        //     for(int j = 0; j < strs[i].length(); j++){
-        //         arr[strs[i].charAt(j) - 'a']++;
+        //     if(!map.containsKey(sort)){
+        //         map.put(sort, new ArrayList<>());
         //     }
-        //     for(int j = 0; j < 26; j++){
-        //         temp += "#" + String.valueOf(arr[j]);
-        //     }
-            
-        //     if(!map.containsKey(temp)){
-        //         map.put(temp, new ArrayList<>());
-        //     }
-        //     map.get(temp).add(strs[i]);
+        //     map.get(sort).add(s);
         // }
 
-        // for(List<String> l: map.values()){
-        //     ans.add(l);
+        // for(List<String> list: map.values()){
+        //     ans.add(list);
         // }
 
         // return ans;
-
     }
 }
