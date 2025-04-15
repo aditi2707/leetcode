@@ -1,32 +1,39 @@
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
 
-        int[] ans = new int[2];
+        // Time Complexity : O(n)
+        // In the worst case, the two numbers can be present at the extreme right.
+        // So pointer i will have to traverse entire array.
+
+        // Space Complexity : O(1)
+
+        
         int i = 0, j = numbers.length - 1;
 
         while(i < j){
-            if(numbers[i] + numbers[j] > target){
-                j--;
-            }
-            else if(numbers[i] + numbers[j] < target){
+            if(numbers[i] + numbers[j] < target){
                 i++;
             }
+            else if(numbers[i] + numbers[j] > target){
+                j--;
+            }
             else{
-                ans[0] = i + 1;
-                ans[1] = j + 1;
-                break;
+                return new int[]{i + 1, j + 1};
             }
         }
 
-        return ans;
+        return new int[0];
 
 
 
 
 
+        // // Time Complexity : O(nlog n)
+        // // The binary search algorithm takes log n TC and this will be done for every element, so
+        // // TC becomes nlog n.
 
-
-
+        // // Space Complexity : O(1)
+        
 
         // int[] ans = new int[2];
         // int i = 0;
