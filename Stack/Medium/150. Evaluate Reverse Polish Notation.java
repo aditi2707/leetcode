@@ -1,37 +1,36 @@
 class Solution {
     public int evalRPN(String[] tokens) {
+
+        // Time Complexity : O(n)
+        // The for loop will run for the entire length of the string and all the 
+        // stack operations are O(1).
+
+        // Space Complexity : O(n)
+        // The stack can have all characters of the string in some cases.
+        
         
         Stack<Integer> stack = new Stack<>();
-        int ans = 0;
-        String operations = "+-*/";
 
         for(String s: tokens){
-            if(operations.indexOf(s) == -1){
-                stack.push(Integer.valueOf(s));
+            if(!s.equals("+") && !s.equals("-") && !s.equals("*") && !s.equals("/")){
+                stack.push(Integer.parseInt(s));
             }
             else{
-                int n1 = stack.pop();
-                int n2 = stack.pop();
+                int a = stack.pop();
+                int b = stack.pop();
 
                 if(s.equals("+")){
-                    n1 += n2;
+                    stack.push(a + b);
                 }
                 else if(s.equals("-")){
-                    n1 = n2 - n1;
+                    stack.push(b - a);
                 }
                 else if(s.equals("*")){
-                    n1 *= n2;
+                    stack.push(a * b);
                 }
                 else{
-                    if(n1 == 0 || n2 == 0){
-                        n1 = 0;
-                    }
-                    else{
-                        n1 = n2 / n1;
-                    }
-                    
+                    stack.push(b / a);
                 }
-                stack.push(n1);
             }
         }
 
