@@ -1,18 +1,20 @@
 class Solution {
     public int search(int[] nums, int target) {
 
-        // TC : O(logn)
-        // SC : O(1)
+        // Time Complexity : O(log n)
+        // This is a basic binary search code which takes O(log n) time.
 
+        // Space Complexity : O(1)
+        
+        
         int low = 0, high = nums.length - 1;
 
         while(low <= high){
-            int mid = low + (high - low)/2;
-
+            int mid = low + (high - low) / 2;
             if(nums[mid] == target){
                 return mid;
             }
-            if(nums[mid] >= nums[low]){
+            else if(nums[mid] >= nums[low]){
                 if(target >= nums[low] && target < nums[mid]){
                     high = mid - 1;
                 }
@@ -21,11 +23,11 @@ class Solution {
                 }
             }
             else{
-                if(target > nums[mid] && target <= nums[high]){
+                if(target <= nums[high] && target > nums[mid]){
                     low = mid + 1;
                 }
                 else{
-                    high = mid - 1;
+                    high= mid - 1;
                 }
             }
         }
