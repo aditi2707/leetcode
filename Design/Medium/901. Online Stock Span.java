@@ -12,6 +12,11 @@ class StockSpanner {
     
     public int next(int price) {
 
+         // Time Complexity : Linear
+
+        // Space Complexity : Linear
+        
+
         if(stack.isEmpty()){
             stack.push(new int[]{price, 1});
             return 1;
