@@ -13,76 +13,127 @@
  *     }
  * }
  */
+
 class BSTIterator {
 
-    // List<Integer> inOrder;
-
     TreeNode root;
-    Stack<TreeNode> stack = new Stack<>();
+    Stack<TreeNode> stack;
 
-    public void BSTStack(TreeNode root){
+    private void dfs(TreeNode r){
 
-        while(root != null){
-            stack.push(root);
-            root = root.left;
+        // Time Complexity : O(height)
+
+        // Space Complexity : O(height)
+
+        
+        TreeNode curr = r;
+        while(curr.left != null){
+            stack.push(curr.left);
+            curr = curr.left;
         }
-    }
 
-    // public void BSTInorder(TreeNode root){
-    //     if(root != null){
-    //         BSTInorder(root.left);
-    //         inOrder.add(root.val);
-    //         BSTInorder(root.right);
-    //     }
-    // }
+        return;
+    }
 
     public BSTIterator(TreeNode root) {
 
         this.root = root;
-        BSTStack(root);
+        stack = new Stack<>();
 
-        // this.root = root;
-        // inOrder = new ArrayList<>();
-        // BSTInorder(root);
+        stack.push(root);
+        dfs(root);
     }
-    
+
     public int next() {
-
-        TreeNode nextSmallest = stack.pop();
-
-        if(nextSmallest.right != null){
-            BSTStack(nextSmallest.right);
+        
+        TreeNode pop = stack.pop();
+        if(pop.right != null){
+            stack.push(pop.right);
+            dfs(pop.right);
         }
 
-        return nextSmallest.val;
-        
-
-        // if(inOrder.size() != 0){
-        //     int num = inOrder.get(0);
-        //     inOrder.remove(0);
-        //     return num;
-        // }
-
-        // return -1;
+        return pop.val;
     }
     
     public boolean hasNext() {
+        
+        return !stack.isEmpty();
+    }
+}
 
-        if(!stack.isEmpty()){
-            return true;
-        }
 
-        return false;
+
+
+// class BSTIterator {
+
+//     // List<Integer> inOrder;
+
+//     TreeNode root;
+//     Stack<TreeNode> stack = new Stack<>();
+
+//     public void BSTStack(TreeNode root){
+
+//         while(root != null){
+//             stack.push(root);
+//             root = root.left;
+//         }
+//     }
+
+//     // public void BSTInorder(TreeNode root){
+//     //     if(root != null){
+//     //         BSTInorder(root.left);
+//     //         inOrder.add(root.val);
+//     //         BSTInorder(root.right);
+//     //     }
+//     // }
+
+//     public BSTIterator(TreeNode root) {
+
+//         this.root = root;
+//         BSTStack(root);
+
+//         // this.root = root;
+//         // inOrder = new ArrayList<>();
+//         // BSTInorder(root);
+//     }
+    
+//     public int next() {
+
+//         TreeNode nextSmallest = stack.pop();
+
+//         if(nextSmallest.right != null){
+//             BSTStack(nextSmallest.right);
+//         }
+
+//         return nextSmallest.val;
+        
+
+//         // if(inOrder.size() != 0){
+//         //     int num = inOrder.get(0);
+//         //     inOrder.remove(0);
+//         //     return num;
+//         // }
+
+//         // return -1;
+//     }
+    
+//     public boolean hasNext() {
+
+//         if(!stack.isEmpty()){
+//             return true;
+//         }
+
+//         return false;
 
 
         
-        // if(inOrder.size() != 0){
-        //     return true;
-        // }
+//         // if(inOrder.size() != 0){
+//         //     return true;
+//         // }
 
-        // return false;
-    }
-}
+//         // return false;
+//     }
+// }
 
 /**
  * Your BSTIterator object will be instantiated and called as such:
