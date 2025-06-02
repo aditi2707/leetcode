@@ -28,6 +28,35 @@ class Solution {
 
 
 
+        // // Time Complexity : O(n * n)
+
+        // // Space Complexity : O(n * n)
+
+
+        // Set<Integer> set = new HashSet<>();
+        // int[] ans = new int[2];
+        // int sum = 0;
+        // int n = grid.length * grid.length;
+        
+        // for(int i = 0; i < grid.length; i++){
+        //     for(int j = 0; j < grid.length; j++){
+        //         if(set.contains(grid[i][j])){
+        //             ans[0] = grid[i][j];
+        //         }
+        //         else{
+        //             sum += grid[i][j];
+        //         }
+        //         set.add(grid[i][j]);
+        //     }
+        // }
+        
+        // ans[1] = (n * (n + 1) / 2) - sum;
+
+        // return ans;
+
+
+
+
 
 
 
