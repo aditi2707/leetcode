@@ -10,67 +10,137 @@
  */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        // Time Complexity : O(max(m, n))
+
+        // Space Complexity : O(max(m, n))
+        
         
         int carry = 0;
         ListNode curr1 = l1;
         ListNode curr2 = l2;
-        ListNode sum = null;
-        ListNode currSum = null;
+        ListNode head = null;
+        ListNode curr = null;
 
-        if(l1 == null && l2 == null){
-            return null;
-        }
-        if(l1 == null){
-            return l2;
-        }
-        if(l2 == null){
-            return l1;
-        }
+        while(curr1 != null && curr2 != null){
+            int sum = (curr1.val + curr2.val + carry) % 10;
+            carry = (curr1.val + curr2.val + carry) / 10;
 
-        while(curr1 != null || curr2 != null){
-
-            if(curr1 != null && curr2 != null){
-                int s = (curr1.val + curr2.val + carry) % 10;
-                carry = (curr1.val + curr2.val + carry) / 10;
-
-                if(sum == null){
-                    sum = new ListNode(s);
-                    currSum = sum;
-                }
-                else{
-                    currSum.next = new ListNode(s);
-                    currSum = currSum.next;
-                }
-                curr1 = curr1.next;
-                curr2 = curr2.next;
-                
-            }
-            else if(curr1 != null){
-                int s = (curr1.val + carry) % 10;
-                carry = (curr1.val + carry) / 10;
-
-                currSum.next = new ListNode(s);
-                currSum = currSum.next;
-
-                curr1 = curr1.next;
-            
+            if(head == null){
+                head = new ListNode(sum);
+                curr = head;
             }
             else{
-                int s = (curr2.val + carry) % 10;
-                carry = (curr2.val + carry) / 10;
-
-                currSum.next = new ListNode(s);
-                currSum = currSum.next;
-                
-                curr2 = curr2.next;
+                curr.next = new ListNode(sum);
+                curr = curr.next;
             }
 
+            curr1 = curr1.next;
+            curr2 = curr2.next;
+        }
+
+        while(curr1 != null){
+            int sum = (curr1.val + carry) % 10;
+            carry = (curr1.val + carry) / 10;
+
+            if(head == null){
+                head = new ListNode(sum);
+                curr = head;
+            }
+            else{
+                curr.next = new ListNode(sum);
+                curr = curr.next;
+            }
             
+            curr1 = curr1.next;
+        }
+
+        while(curr2 != null){
+            int sum = (curr2.val + carry) % 10;
+            carry = (curr2.val + carry) / 10;
+
+            if(head == null){
+                head = new ListNode(sum);
+                curr = head;
+            }
+            else{
+                curr.next = new ListNode(sum);
+                curr = curr.next;
+            }
+
+            curr2 = curr2.next;
         }
 
         if(carry == 1){
-            currSum.next = new ListNode(1);
+            curr.next = new ListNode(1);
         }
-        return sum;
+
+        return head;
+
+
+        
+        
+        // int carry = 0;
+        // ListNode curr1 = l1;
+        // ListNode curr2 = l2;
+        // ListNode sum = null;
+        // ListNode currSum = null;
+
+        // if(l1 == null && l2 == null){
+        //     return null;
+        // }
+        // if(l1 == null){
+        //     return l2;
+        // }
+        // if(l2 == null){
+        //     return l1;
+        // }
+
+        // while(curr1 != null || curr2 != null){
+
+        //     if(curr1 != null && curr2 != null){
+        //         int s = (curr1.val + curr2.val + carry) % 10;
+        //         carry = (curr1.val + curr2.val + carry) / 10;
+
+        //         if(sum == null){
+        //             sum = new ListNode(s);
+        //             currSum = sum;
+        //         }
+        //         else{
+        //             currSum.next = new ListNode(s);
+        //             currSum = currSum.next;
+        //         }
+        //         curr1 = curr1.next;
+        //         curr2 = curr2.next;
+                
+        //     }
+        //     else if(curr1 != null){
+        //         int s = (curr1.val + carry) % 10;
+        //         carry = (curr1.val + carry) / 10;
+
+        //         currSum.next = new ListNode(s);
+        //         currSum = currSum.next;
+
+        //         curr1 = curr1.next;
+            
+        //     }
+        //     else{
+        //         int s = (curr2.val + carry) % 10;
+        //         carry = (curr2.val + carry) / 10;
+
+        //         currSum.next = new ListNode(s);
+        //         currSum = currSum.next;
+                
+        //         curr2 = curr2.next;
+        //     }
+
+            
+        // }
+
+        // if(carry == 1){
+        //     currSum.next = new ListNode(1);
+        // }
+        // return sum;
+        
     }
 }
