@@ -11,26 +11,61 @@
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
 
-        ListNode left = new ListNode(0, head);
-        head = left;
-        ListNode right = head;
+        // Time Complexity : O((total nodes - n) + n) ~ O(n)
+        // If the fast node is already null, it means that the head has to be 
+        // removed.
 
-        while(n >= 0){
-            right = right.next;
+        // Space Complexity : O(1)
+
+        
+        if(head == null){
+            return null;
+        }
+        
+        ListNode fast = head;
+
+        while(n > 0){
+            fast = fast.next;
             n--;
         }
 
-        while(right != null){
-            left = left.next;
-            right = right.next;
+        ListNode slow = head;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next;
         }
 
-        left.next = left.next.next;
+        if(fast == null){
+            head = head.next;
+        }
+        else{
+            slow.next = slow.next.next;
+        }
 
-        return head.next;
+        return head;
 
 
 
+        
+
+        // ListNode left = new ListNode(0, head);
+        // head = left;
+        // ListNode right = head;
+
+        // while(n >= 0){
+        //     right = right.next;
+        //     n--;
+        // }
+
+        // while(right != null){
+        //     left = left.next;
+        //     right = right.next;
+        // }
+
+        // left.next = left.next.next;
+
+        // return head.next;
 
 
 
