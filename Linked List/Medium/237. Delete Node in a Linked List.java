@@ -9,8 +9,15 @@
 class Solution {
     public void deleteNode(ListNode node) {
         
-        ListNode next = node.next.next;
-        node.val = node.next.val;
-        node.next = next;
+        // Time Complexity : O(1)
+
+        // Space Complexity : O(1)
+        
+        
+        int val = node.next.val;
+        node.val = val;
+        node.next = node.next.next;
+
+        return;
     }
 }
