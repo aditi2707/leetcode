@@ -11,29 +11,62 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
 
-        ListNode prev = head;
+        // Time Complexity : O(n)
+
+        // Space Complexity : O(1)
+
 
         if(head == null){
             return null;
         }
-        ListNode curr = head.next;
-        ListNode currN = head.next;
-
-        while(currN != null){
-            currN = currN.next;
-            curr.next = prev;
-
-            if(prev == head){
-                prev.next = null;
-            }
-
-            prev = curr;
-            curr = currN;
+        
+        if(head.next == null){
+            return head;
         }
 
-        head = prev;
+        ListNode prev = head;
+        ListNode curr = head.next;
+
+        while(curr != null){
+            ListNode temp = curr.next;
+            curr.next = head;
+            prev.next = temp;
+            head = curr;
+            curr = temp;
+        }
 
         return head;
+        
+
+        
+
+        // ListNode prev = head;
+
+        // if(head == null){
+        //     return null;
+        // }
+        // ListNode curr = head.next;
+        // ListNode currN = head.next;
+
+        // while(currN != null){
+        //     currN = currN.next;
+        //     curr.next = prev;
+
+        //     if(prev == head){
+        //         prev.next = null;
+        //     }
+
+        //     prev = curr;
+        //     curr = currN;
+        // }
+
+        // head = prev;
+
+        // return head;
+
+
+
+        
         
         // Stack<Integer> stack = new Stack<>();
 
