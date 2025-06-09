@@ -11,18 +11,58 @@
 class Solution {
     public ListNode middleNode(ListNode head) {
         
-        ListNode curr1 = head;
-        ListNode curr2 = head;
+        // Time Complexity : O(n / 2)
 
-        while(curr1.next != null && curr1.next.next != null){
-            curr1 = curr1.next.next;
-            curr2 = curr2.next;
+        // Space Complexity : O(1)
+
+        
+        if(head == null){
+            return null;
+        }
+        if(head.next == null){
+            return head;
         }
 
-        if(curr1.next == null){
-            return curr2;
+        ListNode slow = head;
+        ListNode fast = head.next;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        return curr2.next;
+        if(fast == null){
+            return slow;
+        }
+
+        return slow.next;
+
+
+
+
+
+        // // Time Complexity : O(n + (n / 2))
+
+        // // Space Complexity : O(1)
+
+
+        // int count = 0;
+        // ListNode curr = head;
+
+        // while(curr != null){
+        //     count++;
+        //     curr = curr.next;
+        // }
+
+        // int half = (count / 2) + 1;
+        // curr = head;
+
+        // while(half > 1){
+        //     curr = curr.next;
+        //     half--;
+        // }
+
+        // return curr;
+        
     }
 }
