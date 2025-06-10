@@ -29,6 +29,11 @@ class Solution {
 
     public boolean isPalindrome(ListNode head) {
 
+        // Time Complexity : O((n / 2) * 3)
+
+        // Space Complexity : O(1)
+        
+
         ListNode slow = head;
         ListNode fast = head.next;
 
