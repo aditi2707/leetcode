@@ -46,8 +46,12 @@ class Solution {
     public int kthSmallest(TreeNode root, int k) {
 
         // Time Complexity : O(height + k)
+        // If the value is present in the left subtree, then the TC will be equal to
+        // height of the tree. If in right subtree, then TC will be the height (left
+        // subtree full) + first k elements on the right.
 
         // Space Complexity : O(height)
+        // The stack will have a maximum of height elements at one time.
 
 
         Stack<TreeNode> stack = new Stack<>();
