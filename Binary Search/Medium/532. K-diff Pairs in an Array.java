@@ -45,7 +45,7 @@ class Solution {
 
 
 
-        // // Time Complexity : O(nlog n + (n ^ 2))
+        // // Time Complexity : O(nlog n + (n * (n / 2)))
 
         // // Space Complexity : O(1)
 
