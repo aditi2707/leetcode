@@ -1,6 +1,15 @@
 class Solution {
     public boolean isPalindrome(int x) {
 
+        /* 
+        If the number is very large, and the number is not a palindrome, then the
+        reverse would be some negative overflowed value which would not be equal to
+        the actual value.
+        If the number is very large AND palindrome, then after reversal it will stay
+        the same and so no overflow would occur. Hence this solution works.
+        */
+        
+
         // // Time Complexity : O(log n)
 
         // // Space Complexity : O(1)
