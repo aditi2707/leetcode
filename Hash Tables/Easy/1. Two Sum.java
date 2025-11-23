@@ -1,6 +1,23 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
 
+        /* Naive solution - Take two loops and find the numbers that add up to 
+        target. Then return the indices of these numbers in an array.
+        Time Complexity : O(n ^ 2)
+        Space Complexity : O(1)
+        */
+
+        /* Edge cases:
+        1. When both numbers are same - Then the other won't be added because the
+        first condition would be true.
+
+        2. When there are two different numbers that make up the target, but one
+        of the numbers is present more than once - Doesn't matter because map will
+        just overwrite the new index.
+        */
+
+        
+
         // Time Complexity : O(n)
         // The loop will run for the entirety of nums elements.
 
