@@ -34,14 +34,25 @@ class Solution {
 
     public List<List<Integer>> subsets(int[] nums) {
 
-        // Time Complexity : O(n * 2^n).
-        // For every element in the array, there are two choices, either you take
-        // that element or not. So the TC is 2^n. But those choices are for every
-        // element, so TC is n * 2^n.
+        // Include/exclude recurses down to the end before recording subsets
+        // The for-loop method doesn’t - it generates subsets along the way
 
-        // Space Complexity : O(n) (if we ignore output array and the recursion
-        // stack.)
-        // The temp array will have a max of all array elements so SC is O(n).
+        // Time Complexity : O(n * (2 ^ n))
+        // The for-loop or the recursion will alone take 2^n time as there are
+        // two choices for each element, take or not take.
+        // But the copying of the array into the final array takes upto O(n) time.
+        // Hence TC = O(n * (2 ^ n))
+
+        // Space Complexity : For include/exclude method, O(n + n + (n * (2 ^ n)))
+        // The recursion stack will have only one branch at a time, so O(n).
+        // Also the temp array can have a maximum of n elements, so O(n).
+        // The output array, if considered will have all the 2 ^ n subsets and 
+        // the length of these can extend upto n.
+
+        // Space Complexity : For for-loop method, O(n + (n * (2 ^ n)))
+        // The temp array can have a maximum of n elements, so O(n).
+        // The output array, if considered will have all the 2 ^ n subsets and 
+        // the length of these can extend upto n.
         
         
         List<List<Integer>> ans = new ArrayList<>();
