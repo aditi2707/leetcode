@@ -1,8 +1,10 @@
 class Solution {
     public String mergeAlternately(String word1, String word2) {
 
-        // Time Complexity : O(max(word1.length, word2.length)) (if we consider the 
-        // while loop as well as the substring())
+        // Time Complexity : O(m + n)
+        // In the while loop, if we consider n < m, then the loop is running for
+        // two different strings, till a value of n each. Hence, 2n.
+        // TC = O(2n + m - n) ~ O(m + n)
 
         // Space Complexity : O(word1.length + word2.length)
 
