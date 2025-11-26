@@ -1,5 +1,10 @@
 class Solution {
     public int[] getSneakyNumbers(int[] nums) {
+
+        // Time Complexity : O(n)
+
+        // Space Complexity : O(n)
+        
         
         Set<Integer> set = new HashSet<>();
         int[] ans = new int[2];
