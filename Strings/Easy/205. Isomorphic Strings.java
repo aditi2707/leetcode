@@ -1,18 +1,48 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
+
+        // Time Complexity : O(n)
+
+        // Space Complexity : O(256 * 2)
         
-        int[] sArr = new int[127];
-        int[] tArr = new int[127];
+        
+        int[] sArr = new int[256];
+        int[] tArr = new int[256];
 
         for(int i = 0; i < s.length(); i++){
-            
-            if(sArr[s.charAt(i)] != tArr[t.charAt(i)]){
+            char chA = s.charAt(i);
+            char chB = t.charAt(i);
+
+            if(sArr[chA] == 0 && tArr[chB] == 0){
+                sArr[chA] = chB;
+                tArr[chB] = chA;
+            }
+            else if(sArr[chA] != chB || tArr[chB] != chA){
                 return false;
             }
-
-            sArr[s.charAt(i)] = i+1;
-            tArr[t.charAt(i)] = i+1;
         }
+
+        return true;
+
+
+
+
+        
+        
+        // int[] sArr = new int[127];
+        // int[] tArr = new int[127];
+
+        // for(int i = 0; i < s.length(); i++){
+            
+        //     if(sArr[s.charAt(i)] != tArr[t.charAt(i)]){
+        //         return false;
+        //     }
+
+        //     sArr[s.charAt(i)] = i+1;
+        //     tArr[t.charAt(i)] = i+1;
+        // }
+
+        
         
 
         // for(int i = 0; i < s.length(); i++){
