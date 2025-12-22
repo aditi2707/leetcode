@@ -1,46 +1,71 @@
 class Solution {
 
-    private boolean isCapacity(int[] weights, int days, int maxCapacity){
+    private int countDaysII(int[] weights, int cap, int days){
 
-        int day = 1, load = 0;
+        int sum = 0, d = 0;
 
-        for(int i = 0; i < weights.length; i++){
-            if(load + weights[i] > maxCapacity){
-                day += 1;
-                load = weights[i];
-            }
-            else{
-                load += weights[i];
+        for(Integer i: weights){
+            sum += i;
+            if(sum > cap){
+                d++;
+                sum = i;
             }
         }
 
-        return day <= days;
+        if(sum <= cap){
+            d++;
+        }
+
+        return d;
+    }
+
+
+    private int countDays(int[] weights, int cap, int days){
+
+        int sum = 0, d = 0;
+
+        for(Integer i: weights){
+            if(i > cap){
+                return Integer.MAX_VALUE;
+            }
+            sum += i;
+            if(sum > cap){
+                d++;
+                sum = i;
+            }
+        }
+
+        if(sum <= cap){
+            d++;
+        }
+
+        return d;
     }
 
 
     public int shipWithinDays(int[] weights, int days) {
 
-        // Time Complexity : O(n + nlog n) because the for loop will traverse
-        // through entire array. The while loop will take 
-        // O(log(totalCapacity - maxWeight)) because it is using binary search. But for 
-        // each value, the function will run for the length of the array. So, the time
-        // complexity will be O(length_array * log(totalCapacity - maxWeight)).
-        
+        // Time Complexity : O(n + nlog (sum - max))
+
         // Space Complexity : O(1)
         
-        int totalCapacity = 0, maxWeight = 0;
+        
+        int maxWt = weights[0], max = 0;
 
         for(Integer i: weights){
-            totalCapacity += i;
-            maxWeight = Math.max(maxWeight, i);
+            maxWt = Math.max(maxWt, i);
+            max += i;
         }
 
-        int low = maxWeight, high = totalCapacity;
+        int low = maxWt, high = max;
 
         while(low <= high){
-            int mid = low + (high - low) / 2;
 
-            if(isCapacity(weights, days, mid)){
+            int mid = (low + high) / 2;
+
+            int d = countDaysII(weights, mid, days);
+
+            if(d <= days){
                 high = mid - 1;
             }
             else{
@@ -49,5 +74,42 @@ class Solution {
         }
 
         return low;
+
+
+
+
+
+
+        
+
+        // // Time Complexity : O(n + nlog (sum - min))
+
+        // // Space Complexity : O(1)
+
+        
+        // int min = weights[0], max = 0;
+
+        // for(Integer i: weights){
+        //     min = Math.min(min, i);
+        //     max += i;
+        // }
+
+        // int low = min, high = max;
+
+        // while(low <= high){
+
+        //     int mid = (low + high) / 2;
+
+        //     int d = countDays(weights, mid, days);
+
+        //     if(d <= days){
+        //         high = mid - 1;
+        //     }
+        //     else{
+        //         low = mid + 1;
+        //     }
+        // }
+
+        // return low;
     }
 }
