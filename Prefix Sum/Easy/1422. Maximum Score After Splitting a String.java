@@ -1,30 +1,112 @@
 class Solution {
     public int maxScore(String s) {
-        int nZero = 0;
-        int nOne = 0;
-        int score = 0;
+
+        // Time Complexity : O(n * 2)
+
+        // Space Complexity : O(1)
+        
+        
+        int left = 0;
+        int right = 0;
+
         int max = 0;
 
-
         for(int i = 0; i < s.length(); i++){
-            char ch = s.charAt(i);
-            if(ch == '1'){
-                nOne++;
+            if(s.charAt(i) == '0'){
+                left += 1;
             }
         }
 
-        for(int i = 0; i < s.length()-1; i++){
-            char ch = s.charAt(i);
-            if(ch == '0'){
-                nZero++;
-            }
-            else{
-                nOne--;
-            }
-            score = nZero + nOne;
-            max = Math.max(max, score);
+        if(s.charAt(s.length() - 1) == '0'){
+            left -= 1;
         }
+
+        for(int i = s.length() - 2; i >= 0; i--){
+            if(s.charAt(i + 1) == '1'){
+                right += 1;
+            }
+
+            max = Math.max(max, left + right);
+
+            if(s.charAt(i) == '0'){
+                left -= 1;
+            }
+        }
+
 
         return max;
+
+
+
+
+
+
+
+        // // Time Complexity : O(n * 2)
+
+        // // Space Complexity : O(n)
+        
+        
+        // int[] left = new int[s.length()];
+        // int right = 0;
+
+        // int max = 0;
+
+        // for(int i = 0; i < s.length(); i++){
+        //     if(s.charAt(i) == '0'){
+        //         left[i] += 1;
+        //     }
+        //     if(i != 0){
+        //         left[i] += left[i - 1];
+        //     }
+        // }
+
+        // for(int i = s.length() - 2; i >= 0; i--){
+        //     if(s.charAt(i + 1) == '1'){
+        //         right += 1;
+        //     }
+
+        //     max = Math.max(max, left[i] + right);
+        // }
+
+
+        // return max;
+
+
+
+
+
+
+
+        // // Time Complexity : O(n * 2)
+
+        // // Space Complexity : O(n * 2)
+
+        
+        // int[] left = new int[s.length()];
+        // int[] right = new int[s.length()];
+
+        // int max = 0;
+
+        // for(int i = 0; i < s.length(); i++){
+        //     if(s.charAt(i) == '0'){
+        //         left[i] += 1;
+        //     }
+        //     if(i != 0){
+        //         left[i] += left[i - 1];
+        //     }
+        // }
+
+        // for(int i = s.length() - 2; i >= 0; i--){
+        //     if(s.charAt(i + 1) == '1'){
+        //         right[i] += 1;
+        //     }
+        //     right[i] += right[i + 1];
+
+        //     max = Math.max(max, left[i] + right[i]);
+        // }
+
+
+        // return max;
     }
 }
