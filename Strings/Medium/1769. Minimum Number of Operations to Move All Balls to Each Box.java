@@ -1,27 +1,147 @@
 class Solution {
     public int[] minOperations(String boxes) {
 
-        int[] forward = new int[boxes.length()];
-        int[] backward = new int[boxes.length()];
-        int[] arr = new int[boxes.length()];
+        // Time Complexity : O(n * 2)
 
-        int prev = boxes.charAt(0) == '0'?0 : 1;
+        // Space Complexity : O(1)
+        
+
+        int leftDist = 0;
+        int leftNum = 0;
+        int rightDist = 0;
+        int rightNum = 0;
+
+        int[] ans = new int[boxes.length()];
 
         for(int i = 1; i < boxes.length(); i++){
-            forward[i] += forward[i - 1] + prev;
-            prev += boxes.charAt(i) == '0'?0 : 1;
+            char ch = boxes.charAt(i - 1);
+
+            leftDist += leftNum;
+
+            if(ch == '1'){
+                leftDist += 1;
+                leftNum += 1;
+            }
+
+            ans[i] = leftDist;
         }
 
-        prev = boxes.charAt(boxes.length()-1) == '0'?0 : 1;
+        ans[boxes.length() - 1] = leftDist;
 
-        for(int i = boxes.length()-2; i >= 0; i--){
-            backward[i] += backward[i + 1] + prev;
-            prev += boxes.charAt(i) == '0'?0 : 1;
+        for(int i = boxes.length() - 2; i >= 0; i--){
+            char ch = boxes.charAt(i + 1);
+
+            rightDist += rightNum;
+
+            if(ch == '1'){
+                rightDist += 1;
+                rightNum += 1;
+            }
+
+            ans[i] += rightDist;
         }
 
-        for(int i = 0; i < arr.length; i++){
-            arr[i] = forward[i] + backward[i];
-        }
+        return ans;
+
+
+
+
+
+
+
+        // // Time Complexity : O(n * 2)
+
+        // // Space Complexity : O(n * 2)
+        
+
+        // int[] leftDist = new int[boxes.length()];
+        // int[] leftNum = new int[boxes.length()];
+        // int rightDist = 0;
+        // int rightNum = 0;
+
+        // int[] ans = new int[boxes.length()];
+
+        // for(int i = 1; i < boxes.length(); i++){
+        //     char ch = boxes.charAt(i - 1);
+
+        //     leftDist[i] += leftDist[i - 1] + leftNum[i - 1];
+        //     leftNum[i] += leftNum[i - 1];
+
+        //     if(ch == '1'){
+        //         leftDist[i] += 1;
+        //         leftNum[i] += 1;
+        //     }
+        // }
+
+        // ans[boxes.length() - 1] = leftDist[boxes.length() - 1];
+
+        // for(int i = boxes.length() - 2; i >= 0; i--){
+        //     char ch = boxes.charAt(i + 1);
+
+        //     rightDist += rightNum;
+
+        //     if(ch == '1'){
+        //         rightDist += 1;
+        //         rightNum += 1;
+        //     }
+
+        //     ans[i] = leftDist[i] + rightDist;
+        // }
+
+        // return ans;
+
+
+
+
+
+        
+
+        // // Time Complexity : O(n * 2)
+
+        // // Space Complexity : O(n * 4)
+
+
+        // int[] leftDist = new int[boxes.length()];
+        // int[] leftNum = new int[boxes.length()];
+        // int[] rightDist = new int[boxes.length()];
+        // int[] rightNum = new int[boxes.length()];
+
+        // int[] ans = new int[boxes.length()];
+
+        // for(int i = 1; i < boxes.length(); i++){
+        //     char ch = boxes.charAt(i - 1);
+
+        //     leftDist[i] += leftDist[i - 1] + leftNum[i - 1];
+        //     leftNum[i] += leftNum[i - 1];
+
+        //     if(ch == '1'){
+        //         leftDist[i] += 1;
+        //         leftNum[i] += 1;
+        //     }
+        // }
+
+        // ans[boxes.length() - 1] = leftDist[boxes.length() - 1];
+
+        // for(int i = boxes.length() - 2; i >= 0; i--){
+        //     char ch = boxes.charAt(i + 1);
+
+        //     rightDist[i] += rightDist[i + 1] + rightNum[i + 1];
+        //     rightNum[i] += rightNum[i + 1];
+
+        //     if(ch == '1'){
+        //         rightDist[i] += 1;
+        //         rightNum[i] += 1;
+        //     }
+
+        //     ans[i] = leftDist[i] + rightDist[i];
+        // }
+
+        // return ans;
+
+
+
+
+        
         
         // int[] arr = new int[boxes.length()];
         // for(int i = 0; i < boxes.length(); i++){
