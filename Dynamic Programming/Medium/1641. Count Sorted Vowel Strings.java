@@ -18,6 +18,36 @@ class Solution {
     }
 
     public int countVowelStrings(int n) {
+
+        // Time Complexity : O(5 + (4 * n))
+
+        // Space Complexity : O(5)
+        
+        
+        int[] freq = new int[5];
+
+        Arrays.fill(freq, 1);
+        int sum = 0;
+
+        if(n == 1){
+            return 5;
+        }
+
+        for(int i = 2; i <= n; i++){
+            for(int j = 3; j >= 0; j--){
+                freq[j] += freq[j + 1];
+                if(i == n){
+                    sum += freq[j];
+                }
+            }
+        }
+
+        return sum + freq[4];
+
+
+
+
+        
         
         int[][] dp = new int[n+1][6];
 
