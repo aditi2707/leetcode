@@ -66,5 +66,42 @@ class Solution {
         // }
 
         // return press;
+
+
+
+
+        
+
+
+        // // Space Complexity : O(26 * 2)
+        
+        // PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        
+        // int[] freq = new int[26];
+        // int count = 0, prod = 1, ans = 0;
+
+        // for(char ch: s.toCharArray()){
+        //     freq[ch - 'a'] += 1;
+        // }
+
+        // for(int i = 0; i < 26; i++){
+        //     if(freq[i] == 0){
+        //         continue;
+        //     }
+        //     maxHeap.add(freq[i]);
+        // }
+
+        // while(!maxHeap.isEmpty()){
+
+        //     ans += maxHeap.poll() * prod;
+        //     count++;
+
+        //     if(count == 9){
+        //         prod += 1;
+        //         count = 0;
+        //     }
+        // }
+
+        // return ans;
     }
 }
