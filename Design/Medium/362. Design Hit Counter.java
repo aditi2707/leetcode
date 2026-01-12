@@ -50,6 +50,27 @@ class HitCounter {
 
 
 
+        // Time Complexity : O(log n)
+
+
+        int low = 0, high = counter.size() - 1;
+
+        while(low <= high){
+
+            int mid = (low + high) / 2;
+
+            if(counter.get(mid) <= timestamp - 300){
+                low = mid + 1;
+            }
+            else{
+                high = mid - 1;
+            }
+        }
+
+        return counter.size() - low;
+
+
+
 
 
         // if(timestamp - 300 <= 0){
