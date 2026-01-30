@@ -41,5 +41,46 @@ class Solution {
         }
 
         return;
+
+
+
+
+
+
+        // // Time Complexity : O(n * 2)
+
+        // // Space Complexity : O(1)
+
+        
+        // int t = 0, o = 0, z = 0;
+
+        // for(int i = 0; i < nums.length; i++){
+        //     if(nums[i] == 0){
+        //         z += 1;
+        //     }
+        //     else if(nums[i] == 1){
+        //         o += 1;
+        //     }
+        //     else{
+        //         t += 1;
+        //     }
+        // }
+
+        // for(int i = nums.length - 1; i >= 0; i--){
+        //     if(t > 0){
+        //         nums[i] = 2;
+        //         t -= 1;
+        //     }
+        //     else if(o > 0){
+        //         nums[i] = 1;
+        //         o -= 1;
+        //     }
+        //     else{
+        //         nums[i] = 0;
+        //         z -= 1;
+        //     }
+        // }
+
+        // return;
     }
 }
