@@ -1,37 +1,60 @@
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         
-        int firstRow = 0, lastRow = matrix.length-1;
-        int firstColumn = 0, lastColumn = matrix[0].length-1;
         List<Integer> ans = new ArrayList<>();
-        int m = matrix.length;
-        int n = matrix[0].length;
+        int counter = 0;
 
-        // int r = 0, c = 0;
+        int firstRow = 0;
+        int lastRow = matrix.length - 1;
+        int firstCol = 0;
+        int lastCol = matrix[0].length - 1;
 
-        while(ans.size() < m*n){
+        while(counter < matrix.length * matrix[0].length){
 
-            for(int c = firstColumn; c <= lastColumn; c++){
+            for(int c = firstCol; c <= lastCol; c++){
                 ans.add(matrix[firstRow][c]);
-            }
-            for(int r = firstRow+1; r <= lastRow; r++){
-                ans.add(matrix[r][lastColumn]);
-            }
-            if(firstRow < lastRow){
-                for(int c = lastColumn-1; c >= firstColumn; c--){
-                    ans.add(matrix[lastRow][c]);
-                }
-            }
-            if(firstColumn < lastColumn){
-                for(int r = lastRow-1; r >= firstRow+1; r--){
-                    ans.add(matrix[r][firstColumn]);
-                }
+                counter++;
             }
 
+            if(counter >= matrix.length * matrix[0].length){
+                break;
+            }
+
+            for(int r = firstRow + 1; r <= lastRow; r++){
+                ans.add(matrix[r][lastCol]);
+                counter++;
+            }
+
+            if(counter >= matrix.length * matrix[0].length){
+                break;
+            }
+
+            // if(firstRow < lastRow){
+                for(int c = lastCol - 1; c >= firstCol; c--){
+                    ans.add(matrix[lastRow][c]);
+                    counter++;
+                }
+            // }
+
+            if(counter >= matrix.length * matrix[0].length){
+                break;
+            }
+            
+            // if(firstCol < lastCol){
+                for(int r = lastRow - 1; r > firstRow; r--){
+                    ans.add(matrix[r][firstCol]);
+                    counter++;
+                }
+            // }
+
+            if(counter >= matrix.length * matrix[0].length){
+                break;
+            }
+            
             firstRow++;
             lastRow--;
-            firstColumn++;
-            lastColumn--;
+            firstCol++;
+            lastCol--;
         }
 
         return ans;
